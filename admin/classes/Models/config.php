@@ -1,9 +1,11 @@
 <?php
-const DB_HOST = 'localhost';
+const DB_HOST = 'localhost:3307';
 const DB_USERNAME = 'root';
 const DB_PASSWORD = "";
+const DB_CHARSET = 'utf8';
 const DB_NAME = "dice_game";
 const BASE_URL = "http://localhost/web1022-exam";
+
 function getDbConnection() {
     $conn = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
     if ($conn->connect_error) {

@@ -1,15 +1,49 @@
 <?php
 session_start();
-require_once "../config.php";
-
-
+// require_once "../config.php";
 // Check if the user is logged in and is an admin
-if (!isLoggedIn() || !isAdmin()) {
+// require_once './classes/Controllers/CClass.php';
+require_once './classes/Controllers/CClass.php';
+if(!isLoggedIn() || !isAdmin()) {
     redirectToLogin();
-}
-$page = $_GET['page'] ?? "classes";
+};
+// $page = $_GET['page'] ?? "classes";
+$act = $_GET['act'] ?? '/';
+$cClass = new CClasses();
+switch($act)
+{
+    case 'listClass':
+    {
+        $cClass -> getAllData();
+        break;
+    }
+
+    case 'AddStudent':
+    {
+        $cClass -> insertData();
+        break;
+    }
+
+    case 'UpdateStudent':
+    {
+        $cClass -> uploadData();
+        break;
+    }
+
+    case 'DeleteStudent':
+    {
+        $cClass -> DeleteData();
+        break;
+    }
+
+    case 'DeleteStudentSelected':
+    {
+        $cClass -> DeleteDataSelected();
+        break;
+    }
+};
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,10 +54,10 @@ $page = $_GET['page'] ?? "classes";
 </head>
 <body>
     <div class="container">
-        <?php  require "./components/menu.php"; ?>
         <div class="tab-content active">
-            <?= require_once "$page.php"; ?>
+           
         </div>
     </div>
 </body>
-</html>
+</html> -->
+
