@@ -1,9 +1,9 @@
 <?php
-require_once "../config.php";
-
-if (!isLoggedIn() || !isAdmin()) {
-    redirectToLogin();
-}
+require_once "classes/model/config.php";
+// require "./components/menu.php";
+// if (!isLoggedIn() || !isAdmin()) {
+//     redirectToLogin();
+// }
 
 ?>
     <div class="container">

@@ -35,7 +35,8 @@
 </body>
 </html>
 <?php
-require_once "config.php";
+require_once "./admin/classes/model/config.php";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullname = $_POST['fullname'];

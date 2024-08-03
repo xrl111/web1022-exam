@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "config.php";
+require_once "./admin/classes/model/config.php";
 if (isLoggedIn() || isAdmin()) {
     redirectTo("index.php");
 }
