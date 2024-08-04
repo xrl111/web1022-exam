@@ -67,10 +67,10 @@ form
     justify-content: space-between;
     padding-top: 20px;
 }
-.
 /* Pagination */
 .pagination
 {
+    width: 100%;
     margin-top: 10px;
     display: flex;
     justify-content: center;

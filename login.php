@@ -1,53 +1,7 @@
 <?php
-session_start();
-require_once "config.php";
-if (isLoggedIn() || isAdmin()) {
-    redirectTo("index.php");
-}
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = trim($_POST['username']?? "");
-    $password = trim($_POST['password']?? "");
-
-    if (empty($username) || empty($password)|| ($username === "" || $password==="")) {
-        $error = 'Please fill in both fields.';
-    } else {
-        $conn = getDbConnection();
-
-        // Check in admin table
-        $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $admin = $result->fetch_assoc();
-
-        if ($admin && password_verify($password, $admin['password'])) {
-            $_SESSION['user_id'] = $admin['id'];
-            $_SESSION['username'] = $admin['username'];
-            $_SESSION['user_role'] = 'admin';
-            header("Location: ./admin/index.php");
-            exit();
-        }
-
-        // Check in student table
-        $stmt = $conn->prepare("SELECT * FROM student WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $student = $result->fetch_assoc();
-
-        if ($student && password_verify($password, $student['password'])) {
-            $_SESSION['user_id'] = $student['id'];
-            $_SESSION['username'] = $student['username'];
-            $_SESSION['user_role'] = 'student';
-            header("Location: index.php");
-            exit();
-        }
-
-        $error = 'Invalid username or password.';
-    }
-}
+require_once './admin/classes/Controllers/CStudent.php';
+$cStu = new CStudents();
+$cStu -> login();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -205,7 +159,7 @@ button{
         <label for="password">Password</label>
         <input type="password" placeholder="Password" id="password" name="password" required>
 
-        <button type="submit">Log In</button>
+        <button type="submit" name="login">Log In</button>
     </form>
 </body>
 </html>

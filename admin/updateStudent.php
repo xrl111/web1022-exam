@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Register</h1>
+        <h1>Update</h1>
         <form action="?act=UpdateStudent&id=<?php echo $listStu -> id ?>" method="POST">
             <label for="fullname">Full Name:</label>
             <input type="text" id="fullname" name="fullname" required value="<?php echo $listStu -> fullname ?>">

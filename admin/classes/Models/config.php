@@ -22,6 +22,10 @@ function isAdmin() {
     return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
 }
 
+function isStudent() {
+    return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'student';
+}
+
 function redirectToLogin() {
     header("Location: login.php");
     exit();

@@ -4,17 +4,29 @@ session_start();
 // Check if the user is logged in and is an admin
 // require_once './classes/Controllers/CClass.php';
 require_once './classes/Controllers/CClass.php';
+require_once './classes/Controllers/CStudent.php';
+require_once './classes/Models/MStudent.php';
+require_once './classes/Controllers/CQuestion.php';
+
 if(!isLoggedIn() || !isAdmin()) {
     redirectToLogin();
-};
+}
 // $page = $_GET['page'] ?? "classes";
 $act = $_GET['act'] ?? '/';
 $cClass = new CClasses();
+$cStu = new CStudents();
+$cQues = new CQuestions();
 switch($act)
 {
     case 'listClass':
     {
         $cClass -> getAllData();
+        break;
+    }
+
+    case 'listQuestion':
+    {
+        $cQues -> getAllData();
         break;
     }
 
@@ -24,9 +36,21 @@ switch($act)
         break;
     }
 
+    case 'AddQuestion':
+    {
+        $cQues -> insertData();
+        break;
+    }
+
     case 'UpdateStudent':
     {
         $cClass -> uploadData();
+        break;
+    }
+
+    case 'UpdateQuestion':
+    {
+        $cQues -> uploadData();
         break;
     }
 
@@ -41,9 +65,37 @@ switch($act)
         $cClass -> DeleteDataSelected();
         break;
     }
+
+    case 'DeleteQuestion':
+    {
+        $cQues -> DeleteData();
+        break;
+    }   
+    
+    case 'DeleteQuestionSelected':
+    {
+        $cQues -> DeleteDataSelected();
+        break;
+    }
+
+    case 'Login':
+    {
+        $cStu -> login();
+        break;
+    }
+    case 'SetPoint':
+    {
+        $cClass -> SetPoint();
+        break;
+    }
+    // case 'DiceGame':
+    // {
+    //     $cStu -> diceGame();
+    //     break;
+    // }
 };
 ?>
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -59,5 +111,5 @@ switch($act)
         </div>
     </div>
 </body>
-</html> -->
+</html>
 
