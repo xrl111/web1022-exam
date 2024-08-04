@@ -1,10 +1,27 @@
 <?php
 session_start();
-require_once "./admin/classes/model/config.php";
+// require_once "./admin/classes/model/config.php";
+require_once "model/inf_user.php";
+require_once "controller/edit_information.php";
+
+$hi = new ConnectDB();
 
 if (!isLoggedIn() || !$_SESSION['user_role'] === 'student') {
     redirectToLogin();
 }
+
+$user_name = '';
+if (isset($_SESSION['username'])) {
+  $user_name = $_SESSION['username'];
+}
+
+$user_id = '';
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+}
+$act = isset($_GET['act']) ? $_GET['act'] : '/';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,20 +31,22 @@ if (!isLoggedIn() || !$_SESSION['user_role'] === 'student') {
     <title>Xúc Xắc Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Xúc Xắc Game</h1>
-        <label for="totalNumber">Nhập số:</label>
-        <input type="number" id="totalNumber" name="totalNumber" min="3">
-        <button id="rollButton">Xoay Xúc Xắc</button>
-        <div id="diceContainer">
-            <div class="dice" id="dice1"></div>
-            <div class="dice" id="dice2"></div>
-            <div class="dice" id="dice3"></div>
-        </div>
-        <div id="result"></div>
-        <div id="questions"></div>
-    </div>
-    <script src="script.js"></script>
-</body>
+<?php
+
+switch($act){
+
+    case '/':
+         require_once "trangchu.php"; 
+        break;
+
+        case 'suathongtin':
+            $ui = new user();
+            $ui->update();
+            break;
+
+}
+?>
 </html>
+
+
+
