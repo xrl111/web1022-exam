@@ -27,15 +27,12 @@
                     $idStu = $_POST['idStu'];
                     foreach($listStuCode as $stu)
                     {
-                        if(strtolower($idStu) === strtolower($stu -> student_code))
+                        $student_code = $stu -> student_code;
+                        if(strtoupper($student_code) == strtoupper($idStu))
                         {
                             $hidePag = true;
-                            $listStu = $cStu -> getDataByStudentCode($idStu);
+                            $listStu = $cStu -> getDataByStudentCode($stu -> student_code);
                             include_once 'classes.php';
-                            break;
-                        }else
-                        {
-                            header('Location: ?act=listClass&id=WD19320');
                             break;
                         }
                     }
@@ -54,6 +51,15 @@
                     include_once 'classes.php';
                 }
             }
+        }
+
+        public function resetCurrentTurn()
+        {
+            $cStu = new Students();
+            $id = $_GET['id'];
+            $StuId = $cStu -> getDataById($id);
+            $cStu -> updateCurrentTurn($id);
+            header('Location: ?act=listClass&id='. $StuId -> class);
         }
 
         public function insertData()

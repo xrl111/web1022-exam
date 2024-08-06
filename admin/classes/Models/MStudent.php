@@ -12,7 +12,7 @@
 
         public function getAllData()
         {
-            $sql = 'SELECT * FROM student';
+            $sql = 'SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student';
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData();
         }
@@ -92,6 +92,13 @@
             $sql = 'UPDATE student SET current_turn = ? WHERE username = ?';
             $this -> connect -> setQuery($sql);
             $this -> connect -> execute([$current_turn,$username]);
+        }
+
+        public function updateCurrentTurn($id)
+        {
+            $sql = 'UPDATE student SET current_turn = 0 WHERE id = ?';
+            $this -> connect -> setQuery($sql);
+            $this -> connect -> execute([$id]);
         }
 
         public function updatePassword($password, $username)

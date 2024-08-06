@@ -80,15 +80,23 @@ form
                             <table>
                                 <tr class="title-table" style="background-color: rgba(172, 255, 47, 0.589);">
                                     <th>Lớp</th>
-                                    <th>điểm</th>
+                                    <th>điểm</th>   
                                     <th></th>
                                 </tr>
                                   <tr>
                                     <td class="class-name"> <?php echo $listStu -> class  ?> </td>
                                     <td class="totalScore"> <?php if($listStu -> score){echo $listStu -> score; }else{ echo '0';} ?> </td>
-                                    <td class="btn-setting-delete">
-                                        <button type="button"><a href="?act=UpdateInformation">Vào thi</a></button>
-                                    </td>
+                                    <?php
+                                        if($currentDate >= $listDay -> startday && $currentDate <= $listDay -> endday)
+                                        {
+                                            ?>
+                                                <td class="btn-setting-delete">
+                                                    <button type="button"><a href="?act=DiceGame">Vào thi</a></button>
+                                                </td>
+                                            <?php
+                                        }   
+                                    ?>
+                                   
                                 </tr>
                             </table>
                         </div>

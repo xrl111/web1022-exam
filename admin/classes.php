@@ -64,7 +64,10 @@
                                             <td class="score2"> <?php if($stu -> result_2){echo $stu -> result_2; }else{ echo '0';} ?>  </td>
                                             <td class="score3"> <?php if($stu -> result_3){echo $stu -> result_3; }else{ echo '0';} ?> </td>
                                             <td class="totalScore"> <?php if($stu -> score){echo $stu -> score; }else{ echo '0';} ?> </td>
-                                            <td class="btn-setting-delete"> <button type="button" class="update-btn"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button></td>
+                                            <td class="btn-setting-delete"> 
+                                                <button type="button" class="update-btn"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button>
+                                                <button type="button" class="update-btn"><a href="?act=ResetCurrentTurn&id=<?php echo $stu -> id ?>">RESET</a></button>     
+                                            </td>
                                             <td class="btn-setting-delete">
                                                 <button type="button" class="delete-btn" onclick="confirmDeleted('?act=DeleteStudent&id=<?php echo $stu -> id?>')">XOÁ</button>     
                                             </td>

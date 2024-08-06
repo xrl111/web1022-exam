@@ -7,8 +7,10 @@
         require_once './admin/classes/Models/MAdmin.php';
         require_once './admin/classes/Models/MConfig.php';
         require_once './admin/classes/Models/MQuestion.php';
+        require_once './admin/classes/Models/MClass.php';
     }else if (strpos($current_url, '/web1022-exam/admin/index.php?act=listClass&id=WD19320') !== false || strpos($current_url, '/web1022-exam/admin/index.php?act=DiceGame') !== false) {
         require_once 'classes/Models/MStudent.php';
+        require_once 'classes/Models/MClass.php';
         require_once 'classes/Models/MAdmin.php';
         require_once 'classes/Models/MConfig.php';
         require_once 'classes/Models/MQuestion.php';
@@ -96,7 +98,11 @@
             {
                 // session_start();
                 $cStu = new Students();
+                $cClas = new Classes();
                 $listStu = $cStu -> getDataFromUser($_SESSION['username']);
+                $nameClass = 'WD19320';
+                $listDay = $cClas -> getDayExam($nameClass);
+                $currentDate = date('Y-m-d');
                 include_once 'manageInformation.php';
             }
         }

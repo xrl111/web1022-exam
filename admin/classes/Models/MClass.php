@@ -37,5 +37,12 @@
             $this -> connect -> setQuery($sql);
             $this -> connect -> execute([$id,$id2]);
         }
+
+        public function getDayExam($className)
+        {
+            $sql = 'SELECT startday,endday FROM classes WHERE className = ?';
+            $this -> connect -> setQuery($sql);
+            return $this -> connect -> loadData([$className],false);
+        }
     }
 ?>

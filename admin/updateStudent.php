@@ -20,10 +20,6 @@
                 <input type="text" id="username" name="username" required value="<?php echo $listStu -> username?>">
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required value="<?php echo $listStu -> password?>">
-            </div>
-            <div class="form-group">
                 <label for="role">Class:</label>
                 <input type="class" id="class" name="class" required value="<?php echo $listStu -> class?>">
             </div>

@@ -92,11 +92,13 @@ switch($act)
         $cClass -> SetPoint();
         break;
     }
-    // case 'DiceGame':
-    // {
-    //     $cStu -> diceGame();
-    //     break;
-    // }
+
+    case 'ResetCurrentTurn':
+    {
+        $cClass -> resetCurrentTurn();
+        break;
+    }
+    
 };
 ?>
 <!DOCTYPE html>

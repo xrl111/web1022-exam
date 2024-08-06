@@ -32,7 +32,7 @@
             <div class="list">
                 <!-- <label for="totalNumber">Nhập số:</label> -->
                 <form action="?act=LogicDiceGame" method="post" onsubmit="updateHiddenFields()">
-                    <input type="number" id="totalNumber" name="totalNumber" min="3" value="<?php echo $totalOfQues ?>">
+                    <input type="hidden" id="totalNumber" name="totalNumber" min="3" value="<?php echo $totalOfQues ?>">
                     <input type="hidden" name="content1" id="content1">
                     <input type="hidden" name="content2" id="content2">
                     <input type="hidden" name="content3" id="content3">
