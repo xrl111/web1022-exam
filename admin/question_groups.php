@@ -1,32 +1,33 @@
-<?php require "./components/menu.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách nhóm câu hỏi</title>
-    <link rel="stylesheet" href="./styles/question.css">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 <body>
     <div class="container">
+    <?php require "./components/menu.php"; ?>
         <div class="content">
             <h2>Danh sách Nhóm</h2>
-            <div class="btn">
+            <div class="list">
                 <?php 
                     foreach($listQuesGrp as $ques)
                     {
                         ?>
-                            <button> <a href="?act=&id=<?php echo $ques -> name ?>"><?php echo $ques -> name ?></a> </button>
+                            <div class="list-item"><a  href="?act=listQuestion&id=<?php echo $ques -> id ?>"><?php echo $ques -> name ?></a></div>  
                         <?php
                     }
                 ?>
             </div>
 
             <h2><?php echo $_GET['id'] ?></h2>
-            <form action="" method="post">
-                <label for="">Search Question ID</label>
-                <input type="text" name="idQues" >
-                <input type="submit" name="search" value="Search">
+            <form action="" method="post" class="search-form">
+                <div class="search-item"><label for="">Search Question ID</label></div>
+                <div class="search-item"><input type="text" name="idQues" ></div>
+                <div class="search-item"><input type="submit" name="search" value="Search"></div>
             </form>
 
             <div class="listQues">
@@ -40,6 +41,7 @@
                                     <th>Câu hỏi </th>
                                     <th>Câu trả lời</th>
                                     <th>Nhóm câu hỏi</th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
 
@@ -55,8 +57,10 @@
                                             <td class="answer"> <?php echo $ques -> answer ?> </td>
                                             <td class="questionGroup"> <?php echo $ques -> question_groups ?>  </td>
                                             <td class="btn-setting-delete">
-                                                <button type="button"><a href="?act=UpdateQuestion&id=<?php echo $ques -> id ?>">SỬA</a></button>
-                                                <button type="button" onclick="confirmDeleted('?act=DeleteQuestion&id=<?php echo $ques -> id?>')">XOÁ</button>     
+                                                <button type="button" class="update-btn"><a href="?act=UpdateQuestion&id=<?php echo $ques -> id ?>">SỬA</a></button>
+                                            </td>
+                                            <td class="btn-setting-delete">
+                                                <button type="button" class="delete-btn" onclick="confirmDeleted('?act=DeleteQuestion&id=<?php echo $ques -> id?>')">XOÁ</button>     
                                             </td>
                                         </tr>
                                         <?php

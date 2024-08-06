@@ -1,8 +1,6 @@
 <?php
 session_start();
-// require_once "../config.php";
-// Check if the user is logged in and is an admin
-// require_once './classes/Controllers/CClass.php';
+require_once "./classes/Models/config.php";
 require_once './classes/Controllers/CClass.php';
 require_once './classes/Controllers/CStudent.php';
 require_once './classes/Models/MStudent.php';
@@ -60,6 +58,12 @@ switch($act)
         break;
     }
 
+    // case 'UpdateScore':
+    // {
+    //     $cClass -> SetPointTest();
+    //     break;
+    // }
+
     case 'DeleteStudentSelected':
     {
         $cClass -> DeleteDataSelected();
@@ -101,15 +105,10 @@ switch($act)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="./styles/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="tab-content active">
-           
-        </div>
-    </div>
 </body>
 </html>
 

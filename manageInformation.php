@@ -79,17 +79,15 @@ form
                             
                             <table>
                                 <tr class="title-table" style="background-color: rgba(172, 255, 47, 0.589);">
-                                    <th>Họ và Tên</th>
-                                    <th>Mã sinh viên </th>
-                                    <th>Tổng điểm</th>
+                                    <th>Lớp</th>
+                                    <th>điểm</th>
                                     <th></th>
                                 </tr>
                                   <tr>
-                                    <td class="name"> <?php echo $listStu -> fullname  ?> </td>
-                                    <td class="student_code"> <?php echo $listStu -> student_code ?> </td>
+                                    <td class="class-name"> <?php echo $listStu -> class  ?> </td>
                                     <td class="totalScore"> <?php if($listStu -> score){echo $listStu -> score; }else{ echo '0';} ?> </td>
                                     <td class="btn-setting-delete">
-                                        <button type="button"><a href="?act=UpdateInformation">SỬA</a></button>
+                                        <button type="button"><a href="?act=UpdateInformation">Vào thi</a></button>
                                     </td>
                                 </tr>
                             </table>

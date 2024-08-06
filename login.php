@@ -1,7 +1,7 @@
 <?php
 require_once './admin/classes/Controllers/CStudent.php';
 $cStu = new CStudents();
-$cStu -> login();
+$error = $cStu -> login();
 ?>
 <!DOCTYPE html>
 <html lang="en">

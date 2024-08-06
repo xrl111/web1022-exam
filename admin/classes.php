@@ -1,48 +1,52 @@
-<?php require "./components/menu.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách lớp</title>
-    <link rel="stylesheet" href="./styles/classes.css">
+    <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 <body>
     <div class="container">
+    <?php require "./components/menu.php"; ?>
         <div class="content">
             <h2>Danh sách lớp</h2>
-            <div class="btn">
+            <div class="list">
                 <?php 
                     foreach($listClas as $clas)
                     {
                         ?>
-                            <button> <a href="?act=listClass&id=<?php echo $clas -> className ?>"><?php echo $clas -> className ?></a> </button>
+                        <div class="list-item">
+                         <a  href="?act=listClass&id=<?php echo $clas -> className ?>"><?php echo $clas -> className ?></a>
+                        </div>
+                            
                         <?php
                     }
                 ?>
             </div>
 
             <h2><?php echo $_GET['id'] ?></h2>
-            <form action="" method="post">
-                <label for="">Search Student ID</label>
-                <input type="text" name="idStu" >
-                <input type="submit" name="search" value="Search">
+            <form action="" method="post" class="search-form">
+                <div class="search-item"><label for="">Search Student ID</label></div>
+                <div class="search-item"><input type="text" name="idStu" ></div>
+                <div class="search-item"><input type="submit" name="search" value="Search"></div>
             </form>
 
             <div class="listStu">
-                <form action="?act=DeleteStudentSelected" method="post">
+                <form action="classes.php" method="post">
                         <div class="list" border=1>
                             
                             <table>
                                 <tr class="title-table" style="background-color: rgba(172, 255, 47, 0.589);">
                                     <th></th>
                                     <th>Họ và Tên</th>
+                                    <th>Mã sinh viên</th>
                                     <th>Lớp </th>
                                     <th>Câu 1</th>
                                     <th>Câu 2</th>
                                     <th>Câu 3</th>
                                     <th>Tổng điểm</th>
-                                    <!-- <th>Thời gian </th> -->
+                                    <th></th>
                                     <th></th>
                                 </tr>
 
@@ -54,14 +58,15 @@
                                         <tr>
                                             <td class="btn-check"><input type="checkbox" class="checkbox" name="checkboxes[]" value="<?php echo $stu -> id  ?>"></td>
                                             <td class="name"> <?php echo $stu -> fullname  ?> </td>
+                                            <td class="student-code"> <?php echo $stu -> student_code ?> </td>
                                             <td class="class"> <?php echo $stu -> class ?> </td>
                                             <td class="score1"> <?php if($stu -> result_1){echo $stu -> result_1; }else{ echo '0';} ?> </td>
                                             <td class="score2"> <?php if($stu -> result_2){echo $stu -> result_2; }else{ echo '0';} ?>  </td>
                                             <td class="score3"> <?php if($stu -> result_3){echo $stu -> result_3; }else{ echo '0';} ?> </td>
                                             <td class="totalScore"> <?php if($stu -> score){echo $stu -> score; }else{ echo '0';} ?> </td>
+                                            <td class="btn-setting-delete"> <button type="button" class="update-btn"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button></td>
                                             <td class="btn-setting-delete">
-                                                <button type="button"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button>
-                                                <button type="button" onclick="confirmDeleted('?act=DeleteStudent&id=<?php echo $stu -> id?>')">XOÁ</button>     
+                                                <button type="button" class="delete-btn" onclick="confirmDeleted('?act=DeleteStudent&id=<?php echo $stu -> id?>')">XOÁ</button>     
                                             </td>
                                         </tr>
                                         <?php
@@ -79,34 +84,6 @@
                         </div>
 
                 </form>
-
-                <div class="list">
-                    <table>
-                        <tr class="title-table" style="background-color: rgba(172, 255, 47, 0.589);">
-                                <th>Set Point</th>
-                        </tr>
-                    </table>
-                <?php
-                    foreach($listStu as $stu)
-                    {
-                        ?>
-                        <form action="?act=SetPoint" method="post">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input type="number" name="point">
-                                        <input type="hidden" name="id" value="<?php echo $stu -> id ?>">
-                                        <input type="submit" name="setPoint" value="Set Point">
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                        <?php
-                    }
-                    ?>
-                    
-                </div>
-                
             </div>
             
             

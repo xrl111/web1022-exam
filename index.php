@@ -1,12 +1,12 @@
 <?php
 session_start();
+require_once "./admin/classes/Models/config.php";
 require_once './admin/classes/Controllers/CStudent.php';
 require_once './admin/classes/Controllers/CStudent.php';
 
-// if(!isLoggedIn() || !isStudent()) {
-//     redirectToLogin();
-// }
-// $page = $_GET['page'] ?? "classes";
+if(!isLoggedIn() || !isStudent()) {
+    redirectToLogin();
+}
 $act = $_GET['act'] ?? '/';
 $cStu = new CStudents();
 switch($act)

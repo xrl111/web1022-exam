@@ -57,6 +57,7 @@
                 if(empty($username) || empty($password)|| ($username === "" || $password ===""))
                 {
                     $error = 'Please fill in both fields.';
+                    return $error;
                 }else
                 {
                     $listStu = $cStu -> getDataFromUser($username);
@@ -82,6 +83,7 @@
                     }
     
                     $error = 'Invalid username or password.';
+                    return $error;
                 }
             }
         }

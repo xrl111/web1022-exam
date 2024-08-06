@@ -121,6 +121,8 @@
             
         }
 
+        
+
         public function DeleteData()
         {
             if(isset($_GET['id']))
