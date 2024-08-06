@@ -47,9 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = getDbConnection();
 
     if ($role == "student") {
-        $student_code = $_POST['student_code'];
         
-        $sql = "INSERT INTO student (fullname, username, student_code, password, class, result_1, result_2, result_3, score, created_at) 
+        $sql = "INSERT INTO student (fullname, username, password) 
                 VALUES (?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NOW())";
         
         $stmt = $conn->prepare($sql);
