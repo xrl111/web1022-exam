@@ -36,5 +36,8 @@ switch($act)
         $cStu -> LogicDiceGame();
         break;
     }
+
+
+
 };
 ?>

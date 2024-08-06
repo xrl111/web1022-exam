@@ -13,6 +13,7 @@
         <div class="content">
             <h2>Danh sách Nhóm</h2>
             <div class="list">
+                <a href=""><button>Them Group</button></a>
                 <?php 
                     foreach($listQuesGrp as $ques)
                     {

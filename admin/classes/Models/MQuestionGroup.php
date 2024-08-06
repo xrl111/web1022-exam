@@ -11,29 +11,29 @@ class QuestionsGroup{
         return $this->connect->loadData();
     }
 
-    // public function getAllQuestionsById($id){
-    //     $sql = 'SELECT * FROM questions WHERE id= ?';
-    //     $this->connect->setQuery($sql);
-    //     return $this->connect->loadData([$id], false);
-    // }
+    public function getAllQuestionGroupById($id){
+        $sql = 'SELECT * FROM question_groups WHERE id= ?';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData([$id], false);
+    }
 
-    // public function setInsertQuestions($id,$number,$question,$answer,$question_groups,$created_at){
-    //     $sql = 'INSERT INTO questions VALUES (?,?,?,?,?,?)';
-    //     $this->connect->setQuery($sql);
-    //     return $this->connect->execute([$id,$number,$question,$answer,$question_groups,$created_at]);
-    // }
+    public function setInsertQuestionGroups($id,$name){
+        $sql = 'INSERT INTO question_groups VALUES (?,?)';
+        $this->connect->setQuery($sql);
+        return $this->connect->execute([$id,$name]);
+    }
 
-    // public function updateQuestions($number,$question,$answer,$question_groups,$created_at,$id){
-    //     $sql = 'UPDATE questions SET number=?,question=?,answer=?,question_groups=?,created_at=? WHERE id= ?';
-    //     $this->connect->setQuery($sql);
-    //     return $this->connect->execute([$number,$question,$answer,$question_groups,$created_at,$id]);
-    // }
+    public function updateQuestions($name,$id){
+        $sql = 'UPDATE question_groups SET name=? WHERE id= ?';
+        $this->connect->setQuery($sql);
+        return $this->connect->execute([$name,$id]);
+    }
 
-    // public function deleteData($id){
-    //     $sql= 'DELETE FROM questions WHERE id= ?';
-    //     $this->connect->setQuery($sql);
-    //     return $this->connect->loadData([$id], false);
-    // }
+    public function deleteData($id){
+        $sql= 'DELETE FROM question_groups WHERE id= ?';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData([$id], false);
+    }
 }
 
 ?>
