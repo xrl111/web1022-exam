@@ -31,6 +31,13 @@
                 <div class="search-item"><input type="text" name="idStu" ></div>
                 <div class="search-item"><input type="submit" name="search" value="Search"></div>
             </form>
+            
+            <button id="registerClass">
+                <a href="?act=AddClass">REGISTER CLASS</a>
+            </button>
+            <button id="updateClass">
+                <a href="?act=UpdateClass&id=<?php echo $id ?>">UPDATE CLASS</a>
+            </button>
 
             <div class="listStu">
                 <form action="classes.php" method="post">

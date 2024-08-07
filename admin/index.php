@@ -9,6 +9,10 @@ require_once './classes/Controllers/Cgroup_question.php';
 
 if(!isLoggedIn() || !isAdmin()) {
     redirectToLogin();
+}else if (!isset($_GET['act']) || $_GET['act'] === '/') 
+{
+    header('Location: index.php?act=listClass');
+    exit();
 }
 // $page = $_GET['page'] ?? "classes";
 $act = $_GET['act'] ?? '/';
@@ -101,11 +105,17 @@ switch($act)
         break;
     }
     
-    // case 'DiceGame':
-    // {
-    //     $cStu -> diceGame();
-    //     break;
-    // }
+    case 'AddClass':
+    {
+        $cClass -> insertClass();
+        break;
+    }
+
+    case 'UpdateClass':
+    {
+        $cClass -> updateClass();
+        break;
+    }
 
     case 'showAllGroup':
         $cGroup -> showAlltDataGroup();
@@ -115,13 +125,13 @@ switch($act)
         $cGroup -> addGroups();
         break;
 
-        case 'editGroup':
-            $cGroup -> editGroup();
-            break;
+    case 'editGroup':
+        $cGroup -> editGroup();
+        break;
 
-            case 'delGroup':
-                $cGroup -> delGroup();
-                break;
+        case 'delGroup':
+            $cGroup -> delGroup();
+            break;
 };
 ?>
 <!DOCTYPE html>
@@ -134,6 +144,15 @@ switch($act)
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 <body>
+    <?php
+        if(empty($_GET['act']))
+        {
+            ?>
+                <h1>ĐÂY LÀ TRANG ADMIN</h1>
+                <button><a href="?act=listClass&id=WD19320">QUẢN TRỊ</a> </button>
+            <?php
+        }
+    ?>
 </body>
 </html>
 

@@ -18,18 +18,25 @@
         }
 
         
-        public function setInsertData($id, $className, $question_group, $time)
+        public function setInsertData($id, $className, $question_group, $time,$startDay,$endDay)
         {
-            $sql = 'INSERT INTO classes VALUES (?,?,?,?)';
+            $sql = 'INSERT INTO classes VALUES (?,?,?,?,?,?)';
             $this -> connect -> setQuery($sql);
-            $this -> connect -> execute([$id, $className, $question_group, $time]);
+            $this -> connect -> execute([$id, $className, $question_group, $time,$startDay,$endDay]);
         }
 
-        public function updateData($className, $question_group, $time, $id)
+        public function getDataByClassName($className)
         {
-            $sql = 'UPDATE classes SET className = ?, question_group = ?, created_at = ? WHERE id = ?';
+            $sql = 'SELECT * FROM classes WHERE className = ?';
             $this -> connect -> setQuery($sql);
-            $this -> connect -> execute([$className, $question_group, $time, $id]);
+            return $this -> connect -> loadData([$className],false);
+        }
+
+        public function updateData($className, $question_group, $time,$startday,$endday, $id)
+        {
+            $sql = 'UPDATE classes SET className = ?, question_group = ?, created_at = ?, startday = ?, endday = ? WHERE className = ?';
+            $this -> connect -> setQuery($sql);
+            $this -> connect -> execute([$className, $question_group, $time,$startday,$endday, $id]);
         }
         public function deleteData($id,$id2)
         {

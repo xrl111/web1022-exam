@@ -15,7 +15,7 @@
         {
             $cClas = new Classes();
             $cStu = new Students();
-            $id = $_GET['id'] ?? 'WD19320';
+            $id = $_GET['id'] ?? '';
             if (!isLoggedIn() || !isAdmin()) {
                 redirectToLogin();
             }else if(isset($_POST['search']))
@@ -60,6 +60,33 @@
             $StuId = $cStu -> getDataById($id);
             $cStu -> updateCurrentTurn($id);
             header('Location: ?act=listClass&id='. $StuId -> class);
+        }
+
+        public function insertClass()
+        {
+            $cClas = new Classes();
+            if(isset($_POST['register-clas']))
+            {
+                if(isset($_POST['nameClass']) && isset($_POST['startDay']) && isset($_POST['questionGroup']) && isset($_POST['endDay']))
+                { 
+                    $cClas -> setInsertData(null,$_POST['nameClass'],$_POST['questionGroup'],$_POST['created_at'],$_POST['startDay'],$_POST['endDay']);
+                    header('Location: ?act=listClass&id=WD19320');
+                }
+            }
+            include_once 'registerClass.php';
+        }
+
+        public function updateClass()
+        {
+            $cClas = new Classes();
+            $id = $_GET['id'];
+            $listClass = $cClas -> getDataByClassName($id);
+            if(isset($_POST['register-clas']))
+            {
+                $cClas -> updateData($_POST['className'],$_POST['questionGroup'],$_POST['created_at'],$_POST['startDay'],$_POST['endDay'],$id);
+                header('Location: ?act=listClass&id='.$id);
+            }
+            include_once 'updateClass.php'; 
         }
 
         public function insertData()

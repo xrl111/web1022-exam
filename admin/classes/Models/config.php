@@ -30,6 +30,10 @@ function redirectToLogin() {
     header("Location: login.php");
     exit();
 }
+function redirectToHome() {
+    $current_url = $_SERVER['REQUEST_URI'];
+    echo $current_url;
+}
 function redirectTo($site) {
     header("Location: $site");
     exit();

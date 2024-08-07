@@ -2,7 +2,11 @@ h2 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
+a
+{
+  color: black;
+  text-decoration: none;
+}
 .search-form {
   display: flex;
   flex-wrap: wrap;
@@ -39,6 +43,21 @@ h2 {
 }
 .search-item input:focus {
   outline: none;
+}
+
+#registerClass,#updateClass
+{
+  background-color: rgba(172, 255, 47, 0.589);
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: black;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  cursor: pointer;
+  border: 0;
+  min-width: 100px;
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .search-item input[type="submit"] {

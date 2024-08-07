@@ -18,7 +18,7 @@ class QuestionsGroup{
     }
 
     public function setInsertQuestionGroups($id,$name){
-        $sql = 'INSERT INTO question_groups VALUES (?,?)';
+        $sql = 'INSERT INTO question_groups VALUES (?,?,?,?)';
         $this->connect->setQuery($sql);
         return $this->connect->execute([$id,$name]);
     }

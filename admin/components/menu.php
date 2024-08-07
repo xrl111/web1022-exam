@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
 ?>
  <ul class="nav nav-tabs">
     <li class="nav-item">
-    <a class="nav-link   " data-toggle="tab" href="index.php?act=listClass&id=WD19320">Danh sách Lớp</a>
+    <a class="nav-link" data-toggle="tab" href="index.php?act=listClass&id=WD19320">Danh sách Lớp</a>
     </li>
     <li class="nav-item">
     <a class="nav-link"   data-toggle="tab" href="index.php?act=listQuestion&id=1">Danh sách các nhóm câu hỏi</a>
