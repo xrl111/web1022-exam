@@ -5,6 +5,7 @@ require_once './classes/Controllers/CClass.php';
 require_once './classes/Controllers/CStudent.php';
 require_once './classes/Models/MStudent.php';
 require_once './classes/Controllers/CQuestion.php';
+require_once './classes/Controllers/Cgroup_question.php';
 
 if(!isLoggedIn() || !isAdmin()) {
     redirectToLogin();
@@ -14,6 +15,7 @@ $act = $_GET['act'] ?? '/';
 $cClass = new CClasses();
 $cStu = new CStudents();
 $cQues = new CQuestions();
+$cGroup = new CGroups();
 switch($act)
 {
     case 'listClass':
@@ -99,6 +101,27 @@ switch($act)
         break;
     }
     
+    // case 'DiceGame':
+    // {
+    //     $cStu -> diceGame();
+    //     break;
+    // }
+
+    case 'showAllGroup':
+        $cGroup -> showAlltDataGroup();
+        break;
+
+    case 'insertGroup':
+        $cGroup -> addGroups();
+        break;
+
+        case 'editGroup':
+            $cGroup -> editGroup();
+            break;
+
+            case 'delGroup':
+                $cGroup -> delGroup();
+                break;
 };
 ?>
 <!DOCTYPE html>
