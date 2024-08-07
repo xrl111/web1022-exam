@@ -22,12 +22,14 @@
             include_once 'showAllQuestion.php';
        }
 
+
        public function addGroups(){
         if(isset($_POST['submit'])){
            $name = $_POST['name'];
 
            $cPro = new QuestionsGroup();
            $vPro = $cPro -> setInsertQuestionGroups(null,$name);
+           header('location: ?act=showAllGroup');
         }
         include_once 'add_groupQuestion.php';
     }
@@ -42,6 +44,7 @@
                 $name = $_POST['name'];
      
                 $vPro = $cPro -> setInsertQuestionGroups($name,$id);
+                header('location: ?act=showAllGroup');
              }
         }
         include_once 'editGroup.php';

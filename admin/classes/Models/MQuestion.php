@@ -17,6 +17,23 @@ class Questions{
         return $this->connect->loadData([$number]);
     }
 
+    public function join(){
+        $sql = 'CREATE TABLE ahihi AS 
+                SELECT questions.question_groups, question_groups.id, question_groups.name 
+                FROM questions
+                JOIN question_groups ON questions.question_groups = question_groups.id;';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData();
+    }
+    
+
+
+    public function getDateID($id){
+        $sql = 'SELECT * FROM ahihi WHERE id = ?';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData([$id],false);
+    }
+
     public function countQuestion(){
         $sql = 'SELECT COUNT(question) as TotalOfQuestion FROM questions;';
         $this->connect->setQuery($sql);
@@ -35,10 +52,18 @@ class Questions{
         return $this->connect->loadData([$id],false);
     }
 
+   
+
     public function getAllQuestionsById($id){
         $sql = 'SELECT * FROM questions WHERE question_groups = ?';
         $this->connect->setQuery($sql);
         return $this->connect->loadData([$id]);
+    }
+
+    public function getNameById($questiongroups){
+        $sql = 'SELECT * FROM `questions` WHERE question_groups=?;';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData([$questiongroups]);
     }
 
     public function getAllDataByLimit($id, $from ,$row)

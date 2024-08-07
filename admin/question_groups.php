@@ -12,19 +12,20 @@
     <?php require "./components/menu.php"; ?>
         <div class="content">
             <h2>Danh sách Nhóm</h2>
+            <a href="?act=insertGroup"><button>Them Group</button></a>
+            <a href="?act=showAllGroup"><button>Chi tiet Group</button></a>
             <div class="list">
-                <a href=""><button>Them Group</button></a>
-                <?php 
-                    foreach($listQuesGrp as $ques)
+            <?php 
+                    foreach($listQuesGrp as $quess)
                     {
                         ?>
-                            <div class="list-item"><a  href="?act=listQuestion&id=<?php echo $ques -> id ?>"><?php echo $ques -> name ?></a></div>  
+                            <div class="list-item"><a href="?act=listQuestion&id=<?php echo $quess -> id ?>"> <?php echo $quess -> name?> </a></div>  
                         <?php
-                    }
-                ?>
+         }
+                ?> 
             </div>
-
-            <h2><?php echo $_GET['id'] ?></h2>
+            <h2><?php echo $getId->name ?></h2>
+            
             <form action="" method="post" class="search-form">
                 <div class="search-item"><label for="">Search Question ID</label></div>
                 <div class="search-item"><input type="text" name="idQues" ></div>

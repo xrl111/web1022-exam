@@ -18,9 +18,16 @@
         {
             $cQues = new Questions();
             $cQuesGrp = new QuestionsGroup();
-            $listQuesGrp = $cQuesGrp -> getAllQuestionsGroup();
-            $listQues = $cQues -> getAllQuestions();
-            $id = $_GET['id'] ?? '1';
+            
+            $listQuesGrp = $cQuesGrp->getAllQuestionsGroup();
+            
+            $listQues = $cQues->getAllQuestions();
+            $join =  $cQues->join();
+                 $id = $_GET['id'] ?? null;
+                 $getId = $cQues->getDateID($id);
+                //  var_dump($getId);
+                //  die();
+            
             if (!isLoggedIn() || !isAdmin()) {
                 redirectToLogin();
             }else if(isset($_POST['search']))
@@ -34,7 +41,10 @@
                         if($idQues == $ques -> number)
                         {
                             $hidePag = true;
-                            $listGrp = $cQues -> getAllQuestionsByNumber($idQues);           
+                            $listGrp = $cQues -> getAllQuestionsByNumber($idQues); 
+                            // var_dump($listGrp);
+                            // die();
+                                     
                             include_once 'question_groups.php';
                             break;
                         }
@@ -42,6 +52,8 @@
                 }
             }else
             {
+               
+                
                 $hidePag = false;
                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                 $per_Page = 10;

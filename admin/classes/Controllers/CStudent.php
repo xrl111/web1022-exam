@@ -1,26 +1,9 @@
 <?php
-    $current_url = $_SERVER['REQUEST_URI'];
-    // Kiểm tra URL và thực hiện require_once tương ứng
-    if (strpos($current_url, '/web1022-exam/index.php') !== false || strpos($current_url, '/web1022-exam/login.php') !== false) 
-    {
-        require_once './admin/classes/Models/MStudent.php';
-        require_once './admin/classes/Models/MAdmin.php';
-        require_once './admin/classes/Models/MConfig.php';
-        require_once './admin/classes/Models/MQuestion.php';
-    }else if (strpos($current_url, '/web1022-exam/admin/index.php?act=listClass&id=WD19320') !== false || strpos($current_url, '/web1022-exam/admin/index.php?act=DiceGame') !== false) {
-        require_once 'classes/Models/MStudent.php';
-        require_once 'classes/Models/MAdmin.php';
-        require_once 'classes/Models/MConfig.php';
-        require_once 'classes/Models/MQuestion.php';
-    }else
-    {
-        // echo $current_url;
-    }
-    
-        // Thực hiện hành động khác nếu cần
-
-    // require_once 'classes/Models/MStudent.php';
-    // require_once 'classes/Models/MAdmin.php';
+    require_once __DIR__ . '/../Models/MStudent.php';
+    require_once __DIR__ . '/../Models/MClass.php';
+    require_once __DIR__ . '/../Models/MAdmin.php';
+    require_once __DIR__ . '/../Models/MConfig.php';
+    require_once __DIR__ . '/../Models/MQuestion.php';
     class CStudents
     {
         public $connect;

@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+
+<a href="?act=listQuestion&id=1"><button>back</button></a>
     <table border="1">
         <tr>
             <th>id</th>

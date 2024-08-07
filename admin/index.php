@@ -18,6 +18,7 @@ $cQues = new CQuestions();
 $cGroup = new CGroups();
 switch($act)
 {
+
     case 'listClass':
     {
         $cClass -> getAllData();
@@ -26,7 +27,7 @@ switch($act)
 
     case 'listQuestion':
     {
-        $cQues -> getAllData();
+        $cQues -> getAllData($_GET['id']);
         break;
     }
 
@@ -115,6 +116,7 @@ switch($act)
                 case 'delGroup':
                     $cGroup -> delGroup();
                     break;
+
 };
 ?>
 <!DOCTYPE html>
