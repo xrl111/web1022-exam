@@ -19,21 +19,21 @@
 
         public function getDataByStudentCode($id)
         {
-            $sql = "SELECT * FROM student WHERE student_code = ?";
+            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE student_code = ?";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData([$id]);
         }
         
         public function getAllDataById($id)
         {
-            $sql = "SELECT * FROM student WHERE class = '" . $id . "'";
+            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE class = '" . $id . "'";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData();
         }
 
         public function getDataFromUser($user)
         {
-            $sql = "SELECT * FROM student WHERE username = ? ";
+            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE username = ? ";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData([$user],false);
         }
@@ -47,14 +47,14 @@
 
         public function getDataById($id)
         {
-            $sql = "SELECT * FROM student WHERE id = ?";
+            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE id = ?";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData([$id],false);
         }
 
         public function getAllDataByLimit($id, $from ,$row)
         {
-            $sql = "SELECT * FROM student WHERE class = '" . $id . "'" . " LIMIT " . (int)$from . ", " . (int)$row;
+            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE class = '" . $id . "'" . " LIMIT " . (int)$from . ", " . (int)$row;
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData();
         }
