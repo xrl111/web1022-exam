@@ -49,6 +49,9 @@ require_once __DIR__ . '/../classes/Models/MQuestionGroup.php';
     <a class="nav-link"   data-toggle="tab" href="index.php?act=Config">Config</a>
     </li>
     <li class="nav-item">
+    <a class="nav-link"   data-toggle="tab" href="index.php?act=RelationshipClassAndQuesGrp">Danh sách mối quan hệ giữa lớp và nhóm câu hỏi</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link text-danger" href="#">Chào <?=htmlspecialchars($admin_name);?></a>
     </li>
     <li class="nav-item">

@@ -21,7 +21,25 @@
             </div>
             <div class="form-group">
                 <label for="role">Class:</label>
-                <input type="class" id="class" name="class" required value="<?php echo $listStu -> class?>">
+                <select name="class" id="class" required>
+                    <?php
+                        foreach($listClass as $class)
+                        {
+                            if($class -> className == $listStu -> class)
+                            {
+                                ?>
+                                    <option selected value="<?php echo $class -> className ?>"> <?php echo $class -> className ?> </option>
+                                <?php
+                            }else
+                            {
+                                ?>
+                                    <option value="<?php echo $class -> className  ?>"> <?php echo $class -> className ?> </option>
+                                <?php
+                            }
+                        }
+                    ?>
+                </select>
+                <!-- <input type="class" id="class" name="class" required value="<?php echo $listStu -> class?>"> -->
             </div>
             <div class="form-group">
                 <label for="student_code">Student Code:</label>

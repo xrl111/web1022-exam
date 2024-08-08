@@ -17,7 +17,16 @@
             </div>
             <div class="form-group">
                 <label for="fullname">Question Groups:</label>
-                <input type="text" id="fullname" name="questionGroup" required>
+                <select name="questionGroup" id="fullname" required>
+                    <?php
+                        foreach($listQuesGrp as $ques)
+                        {
+                            ?>
+                                <option  value="<?php echo $ques -> id  ?>"> <?php echo $ques -> name ?> </option>
+                            <?php
+                        }
+                    ?>
+                </select>
             </div>
             <div class="form-group">
                 <label for="fullname">Created :</label>

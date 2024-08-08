@@ -55,5 +55,74 @@
         header('location: ?act=showAllGroup');
         }
     }
+
+    public function getAllDataClassAndQuesGrp()
+    {
+        $cClass = new Classes();
+        $cQuesGrp = new QuestionsGroup();
+        $listClassQuesGrp = $cQuesGrp -> getDataClassandQuesGrp();
+        if(isset($listClassQuesGrp) && $listClassQuesGrp !== '')
+        {
+            $emptyData = false;
+            $listClassQuesGrp = $cQuesGrp -> getDataClassandQuesGrp();
+        }else
+        {
+            $emptyData = true;
+            $error = 'NO DATA';
+        }
+        include_once 'Relationship_Class_QuesGrp.php';
+    }
+
+    public function insertRelationship()
+    {
+        $cClass = new Classes();
+        $cQuesGrp = new QuestionsGroup();
+        $listClass = $cClass -> getClassNameAndID();
+        $listQues = $cQuesGrp -> getIdAndNameQuesGrp();
+        $check = false;
+        if(isset($_POST['add_rela']))
+        {
+            if(isset($_POST['quesGrp']) && isset($_POST['classes']))
+            {   
+                $check = false;
+                $cQuesGrp -> setInsertRelationShip($_POST['classes'],$_POST['quesGrp']);
+                header('Location: ?act=RelationshipClassAndQuesGrp');
+            }else
+            {   
+                $check = true;
+                $error = 'Xin hãy nhập đủ thông tin';
+            }
+        }
+
+        include_once 'addRelationship_Class_QuesGrp.php';
+    }
+
+    public function updateRelationship()
+    {
+        $cClass = new Classes();
+        $cQuesGrp = new QuestionsGroup();
+        $listClass = $cClass -> getClassNameAndID();
+        $listQues = $cQuesGrp -> getIdAndNameQuesGrp();
+        $check = false;
+        if(isset($_GET['idClass']) && isset($_GET['idGrp']))
+        {
+            $listClasQuesGrp = $cQuesGrp -> getIdAndNameQuesGrpByID($_GET['idClass'],$_GET['idGrp']);
+            // var_dump($listClasQuesGrp);
+            // die();
+            if(isset($_POST['update_rela']))
+            {
+                if(isset($_POST['quesGrp']) && isset($_POST['classes']))
+                {
+                    $cQuesGrp -> updateRelationshipClassQuesGrp($_POST['classes'],$_POST['quesGrp'],$_GET['idClass'],$_GET['idGrp']);
+                    header('Location: ?act=RelationshipClassAndQuesGrp');
+                }else
+                {
+                    $check = true;
+                    $error = 'Xin hãy nhập đủ thông tin';
+                }
+            }
+        }
+        include_once 'updateRelationship_Class_QuesGrp.php';
+    }
 }
 ?>
