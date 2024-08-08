@@ -1,3 +1,8 @@
+<?php
+    $totalNumber = $totalOfQues;
+    $rate1 = $listCfig -> rate1;
+    $rate2 = $listCfig -> rate2;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,36 +29,25 @@
     <span style="font-size:30px;cursor:pointer;line-height: 70px;" onclick="openNav()">&#9776;</span>
     <h2><?php echo $_SESSION['fullname'] ?></h2>
 </div>
-
-    <div class="main">
         <div id="container">
             <h1>Xúc Xắc Game</h1>
             <div class="list">
                 <!-- <label for="totalNumber">Nhập số:</label> -->
+                <div class="controll-form">
                 <form action="?act=LogicDiceGame" method="post" onsubmit="updateHiddenFields()">
-                    <input type="hidden" id="totalNumber" name="totalNumber" min="3" value="<?php echo $totalOfQues ?>">
                     <input type="hidden" name="content1" id="content1">
                     <input type="hidden" name="content2" id="content2">
                     <input type="hidden" name="content3" id="content3">
                     <input type="submit" value="Xoay Xúc Xắc" name="roll" id="rollButton" <?php echo $buttonHidden ? 'disabled' : ''; ?> <?php echo $checkLock ? 'disabled' : ''; ?>></input>
                 </form>
-                <?php
-                    if($_SESSION['username'] == 'admin2')
-                    {
-                        ?>
-                            <form action="?act=DiceGame" method="post">
-                                <input type="submit" name="reset" value="Reset">
-                            </form>
-                        <?php
-                    }
-                ?>
                
-                <form action="?act=DiceGame" method="post">
-                    <input type="submit" name="lock" value="lock">
-                </form>
-                <form action="?act=DiceGame" method="post">
-                    <input type="submit" name="unlock" value="unlock">
-                </form>
+                    <form action="?act=DiceGame" method="post">
+                        <input type="submit" name="lock" value="lock">
+                    </form>
+                    <form action="?act=DiceGame" method="post">
+                        <input type="submit" name="unlock" value="unlock">
+                    </form>
+               </div>
                 <div id="diceContainer">
                         <div class="dice" id="dice1"><?php echo $listStu -> result_1  ?></div>
                         <div class="dice" id="dice2"><?php echo $listStu -> result_2 ?></div>
@@ -96,7 +90,6 @@
                 ?>
             </div>
         </div>
-    </div>
     
     <script src="script.js"></script>
 
@@ -104,13 +97,13 @@
 function openNav() 
 {
   document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("container").style.marginLeft = "250px";
+  document.getElementById("container").style.marginLeft = "20px auto";
   document.getElementById("header").style.marginLeft = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("container").style.marginLeft = "0px";
+  document.getElementById("container").style.marginLeft = "20px auto";
   document.getElementById("header").style.marginLeft = "0px";
 }
 function updateHiddenFields() {
@@ -118,6 +111,10 @@ function updateHiddenFields() {
   document.getElementById('content2').value = document.getElementById('dice2').textContent;
   document.getElementById('content3').value = document.getElementById('dice3').textContent;
 }
+    var totalNumber = <?php echo json_encode($totalNumber); ?>;
+    var rate1 = parseInt(<?php echo json_encode($rate1); ?>,10)/100;
+    var rate2 = parseInt(<?php echo json_encode($rate2); ?>,10)/100;
+
 </script>
    
 </body>

@@ -184,3 +184,74 @@ form {
 .form-group button:hover {
   background-color: #0056b3;
 }
+
+.controll-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.controll-form form {
+  margin: 10px 0;
+}
+
+#rollButton,
+input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#rollButton:disabled,
+input[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#diceContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.dice {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#questions {
+  margin-top: 20px;
+  text-align: center;
+}
+.rolling {
+  animation: roll 0.5s infinite linear;
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

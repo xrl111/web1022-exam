@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Aug 08, 2024 at 04:35 AM
+-- Generation Time: Aug 08, 2024 at 11:38 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `fullname`, `username`, `password`, `created_at`) VALUES
 (1, 'Lê Văn Hiệu', 'admin', '$2y$10$/wz2n74.iDH30RzWXpu6ouEgv6WlpxMTeMTfhYOb7zj4IUjtX8.6m', '2024-08-01 10:25:18'),
-(3, 'Hieue lel', 'admin2', '$2y$10$/wz2n74.iDH30RzWXpu6ouEgv6WlpxMTeMTfhYOb7zj4IUjtX8.6m', '2024-08-03 10:34:12');
+(3, 'Hieue lel', 'admin2', 'admin2', '2024-08-03 10:34:12');
 
 -- --------------------------------------------------------
 
@@ -53,9 +53,9 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL,
   `className` varchar(255) DEFAULT NULL,
   `question_group` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `startday` timestamp DEFAULT NULL,
-  `endday` timestamp DEFAULT NULL
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `startday` date DEFAULT NULL,
+  `endday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -63,8 +63,22 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`id`, `className`, `question_group`, `created_at`, `startday`, `endday`) VALUES
-(1, 'WD19320', 1, '2024-08-06', '2024-08-06', '2024-08-08'),
-(2, 'WD19321', 1, '2024-08-01', NULL, NULL);
+(1, 'WD19320', 1, '2024-08-06', '2024-08-08', '2024-08-10'),
+(2, 'WD19321', 2, '2024-08-01', '2024-08-08', '2024-08-10'),
+(5, 'WD19323', 1, '2024-08-08', '2024-08-08', '2024-08-09'),
+(6, 'WD19324', 1, '2024-08-08', '2024-08-08', '2024-08-09');
+
+--
+-- Triggers `classes`
+--
+DELIMITER $$
+CREATE TRIGGER `update_classes_question_groups_after_classes` AFTER UPDATE ON `classes` FOR EACH ROW BEGIN
+                UPDATE classes_question_groups
+                SET classes_question_groups.question_groups_id = NEW.question_group
+                WHERE classes_question_groups.classes_question_group = NEW.id;
+            END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -83,7 +97,8 @@ CREATE TABLE `classes_question_groups` (
 
 INSERT INTO `classes_question_groups` (`classes_question_group`, `question_groups_id`) VALUES
 (1, 1),
-(2, 1);
+(2, 2),
+(5, 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +141,7 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `number`, `question`, `answer`, `question_groups`, `created_at`) VALUES
-(2, 1, 'Trình bày khái niệm DNS, DNS Server và cho ví dụ về nguyên tắc làm việc của DNS Server\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 'DNS là viết tắt của Domain Name System - một hệ thống phân giải tên miền thành địa chỉ IP và ngược lại\r\nDNS Server làm nhiệm vụ chuyển đổi giữa 2 loại địa chỉ : domain name và địa chỉ IP\r\n1. Khi bạn gõ trong browser: www.fpt.vn, máy của bạn sẽ chạy đi hỏi DNS Server: Địa chỉ IP của www.fpt.vn là gì? 					\r\n2. Dns Server sẽ trả về địa chỉ IP tương ứng.					\r\n3. Trình duyệt sẽ chạy đến máy có địa chỉ IP vừa biết để lấy trang web	', 1, '2024-08-04 06:50:47'),
+(2, 1, 'Trình bày khái niệm DNS, DNS Server và cho ví dụ về nguyên tắc làm việc của DNS Server', 'DNS là viết tắt của Domain Name System - một hệ thống phân giải tên miền thành địa chỉ IP và ngược lạiDNS Server làm nhiệm vụ chuyển đổi giữa 2 loại địa chỉ : domain name và địa chỉ IP1. Khi bạn gõ trong browser: www.fpt.vn, máy của bạn sẽ chạy đi hỏi DNS Server: Địa chỉ IP của www.fpt.vn là gì? 					2. Dns Server sẽ trả về địa chỉ IP tương ứng.					3. Trình duyệt sẽ chạy đến máy có địa chỉ IP vừa biết để lấy trang web	', 1, '2024-08-08 05:51:52'),
 (3, 2, 'Hãy mở gói Hosting của bạn, sau đó thực hiện thao tác upload dữ liệu lên hosting bằng 1 FTP software mà bạn biết?', 'My name is hieu', 1, '2024-08-04 10:50:46'),
 (4, 3, 'Qua số liệu thống kê và phân tích cho thấy, website mà bạn quản trị có lượng traffic tương đối ổn định, bỗng dưng hôm qua lượng traffic này tăng đột biến gấp 1000 lần thông thường. Hãy lý giải các nguyên nhân gây nên số liệu này?', '', 1, '2024-08-04 06:50:47'),
 (5, 4, 'Hãy mở gói Hosting của bạn đang dùng, hãy cho biết dung lượng dữ liệu bạn đã lưu trữ trên gói Hosting đó?', '', 1, '2024-08-04 06:50:47'),
@@ -209,21 +224,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`, `class`, `result_1`, `result_2`, `result_3`, `score`, `created_at`, `current_turn`) VALUES
-(10, 'Hoàng Ngọc Lĩnh', 'hoangngoclinh', 'PH53070', 'vwx567', 'WD19320', 0, 0, 0, 8, '2024-08-04 01:07:47', 0),
-(11, 'Nguyễn Thị Hạnh', 'nguyenthihanh', 'PH53071', 'yz0123', 'WD19320', NULL, NULL, NULL, 6, '2024-08-01 15:39:27', 0),
-(12, 'Phạm Quang Huy', 'phamquanghuy', 'PH53072', 'abc123', 'WD19320', NULL, NULL, NULL, 7, '2024-08-01 15:39:27', 0),
-(13, 'Lê Thị Lan', 'lethilan', 'PH53073', 'def456', 'WD19320', NULL, NULL, NULL, 5, '2024-08-01 15:39:27', 0),
-(14, 'Trần Văn Toàn', 'tranvantoan', 'PH53074', 'ghi789', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(15, 'Vũ Ngọc Anh', 'vungocanh', 'PH53075', 'jkl012', 'WD19320', NULL, NULL, NULL, 1, '2024-08-01 15:39:27', 0),
-(16, 'Nguyễn Hải Đăng', 'nguyenhaidang', 'PH53076', 'mno345', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(17, 'Lê Thị Thu', 'lethithu', 'PH53077', 'pqr678', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(18, 'Phạm Minh Tuấn', 'phamminhtuan', 'PH53078', 'stu901', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(19, 'Trần Văn Bình', 'tranvanbinh', 'PH53079', 'vwx234', 'WD19320', NULL, NULL, NULL, 0, '2024-08-01 15:39:27', 0),
-(20, 'Nguyễn Thị Minh', 'nguyenthiminh', 'PH53080', 'yz5678', 'WD19320', NULL, NULL, NULL, 5, '2024-08-01 15:39:27', 0),
-(21, 'Lê Thị Phương', 'lethiphuong', 'PH53081', 'abc345', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(22, 'Bùi Văn Hùng', 'buivanhung', 'PH53082', 'def678', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(23, 'Đỗ Thị Thảo', 'dothithao', 'PH53083', 'ghi901', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(24, 'Trần Thị Quỳnh', 'tranthiquynh', 'PH53084', 'jkl234', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
+(10, 'Hoàng Ngọc Lĩnh', 'hoangngoclinh', 'PH53070', '$2y$10$SsubfST.GK5UPmCw2IndG.vg1bxceN9UWQ7tBQYbNtgpdwrKwunAi', 'WD19321', 12, 1, 9, 8, NULL, 4),
 (25, 'Vũ Văn Mạnh', 'vuvanmanh', 'PH53085', 'mno567', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (26, 'Nguyễn Văn Tuấn', 'nguyenvantuan', 'PH53086', 'pqr890', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (27, 'Lê Văn Đức', 'levanduc', 'PH53087', 'stu123', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
@@ -240,7 +241,7 @@ INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`,
 (38, 'Phạm Minh Khang', 'phamminhkhang', 'PH53098', 'yz0123', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (40, 'Vũ Văn Huy', 'vuvanhuy', 'PH53100', 'def789', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (42, 'Trần Văn An', 'tranvanan', 'PH53102', 'jkl345', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(43, 'Nguyễn Văn Bình', 'nguyenvanbinh', 'PH53103', 'abc456', 'WD19321', NULL, NULL, NULL, 2, '2024-08-01 15:39:27', 0),
+(43, 'Nguyễn Văn Bình', 'nguyenvanbinh', 'PH53103', '$2y$10$BBDpo4QVfUwIrsmeoTUFW.ESKyxLo2yzTkMv6ret1VP4.gvWdrv1i', 'WD19323', 0, 0, 0, 2, NULL, 0),
 (44, 'Trần Thị Hương', 'tranthihuong', 'PH53104', 'def789', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (45, 'Lê Văn Quang', 'levanquang', 'PH53105', 'ghi012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (46, 'Phạm Thị Hoa', 'phamthihoa', 'PH53106', 'jkl345', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
@@ -249,7 +250,7 @@ INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`,
 (49, 'Nguyễn Thị Tâm', 'nguyenthitam', 'PH53109', 'stu234', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (50, 'Trần Văn Thắng', 'tranvanthang', 'PH53110', 'vwx567', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (51, 'Lê Thị Bích', 'lethibich', 'PH53111', 'yz0123', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(52, 'Nguyễn Thị Phương', 'nguyenthiphuong', 'PH53112', 'abc123', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
+(52, 'Nguyễn Thị Phương', 'nguyenthiphuong', 'PH53112', '$2y$10$1gNHsLd53SiRuFo8inmAJODDMXbEAeiJiwvXvyH1WFd8a3eH13flu', 'WD19323', 0, 0, 0, 0, NULL, 0),
 (53, 'Phạm Văn Kiên', 'phamvankien', 'PH53113', 'def456', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (54, 'Trần Minh Sơn', 'tranminhson', 'PH53114', 'ghi789', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (55, 'Nguyễn Thị Lệ', 'nguyenthile', 'PH53115', 'jkl012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
@@ -281,8 +282,11 @@ INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`,
 (81, 'Phạm Minh Phú', 'phamminhphu', 'PH53141', 'ghi012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (82, 'Trần Thị Yến', 'tranthiyen', 'PH53142', 'jkl345', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (83, 'Lê Văn Trừ', 'levanhieu897', 'PH53143', '123123', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 17:24:03', 0),
-(84, 'Lê Văn Hiệu', 'levanhieu', 'PH53067', '$2y$10$tHXaJhzmQlQ2ZM8oOvENVekPa5l3dcCeAqKRoGbZ1yuZlhKivE/di', 'WD19320', 17, 16, 5, NULL, '2024-08-03 13:37:28', 4),
-(85, 'admin', 'admin2', 'PH00000', '$2y$10$.mvf7Q3Ijza2o53YRHSs2.tOAmF121yCgO3cdnr5a3N3u4434wiQe', 'WD19320', 2, 36, 19, 0, NULL, 0);
+(84, 'Lê Văn Hiệu', 'levanhieu', 'PH53067', '$2y$10$xnfWH21sz6JFzpgUpDFsQ.zOFy.BwvDiLDPaq38qXx3Vu4Q88zmDS', 'WD19320', 17, 16, 5, 0, NULL, 4),
+(85, 'admin', 'admin2', 'PH00000', '$2y$10$.mvf7Q3Ijza2o53YRHSs2.tOAmF121yCgO3cdnr5a3N3u4434wiQe', 'WD19320', 2, 36, 19, 0, NULL, 0),
+(86, 'Vũ Thị Hưởng', 'test1', 'PH0002', '$2y$10$WrWfRjDrgZsFhHUcOXETz.Ft3iiwiI9EpUaAkrS/wATwhaaN7DIo6', 'WD19320', NULL, NULL, NULL, NULL, NULL, 0),
+(87, 'Đào Ngọc Hào', 'daongochao', 'PH00009', '$2y$10$tgeNGGmo/SVK24VL3f6c5.bcYxbBNJ2X4e8PsZIBi26V.YoE8Ps0u', 'WD19320', 0, 0, 0, 0, NULL, 0),
+(88, 'Lê Văn Duẩn', 'levanduan', 'PH00006', '$2y$10$j52URLogLyvKgMcw/Fq98u8TsfE6NuYqYkAFegHUfkTM34lHX1hy2', 'WD19320', NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -301,20 +305,6 @@ CREATE TABLE `student_classes` (
 
 INSERT INTO `student_classes` (`student_class`, `classes_id`) VALUES
 (10, 1),
-(11, 1),
-(12, 1),
-(13, 1),
-(14, 1),
-(15, 1),
-(16, 1),
-(17, 1),
-(18, 1),
-(19, 1),
-(20, 1),
-(21, 1),
-(22, 1),
-(23, 1),
-(24, 1),
 (25, 1),
 (26, 1),
 (27, 1),
@@ -442,7 +432,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `config`
@@ -460,13 +450,13 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `question_groups`
 --
 ALTER TABLE `question_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Constraints for dumped tables

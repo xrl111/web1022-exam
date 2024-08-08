@@ -1,25 +1,46 @@
-
-document.getElementById("rollButton").addEventListener("click", function (event) {
-  const totalNumber = document.getElementById("totalNumber").value;
-  if (totalNumber < 3) {
-    alert("Số phải lớn hơn hoặc bằng 3");
-    event.preventDefault();
+document.getElementById("rollButton").addEventListener("click", function () {
+  if (isNaN(totalNumber) || totalNumber < 3) {
+    alert("Vui lòng nhập một số hợp lệ lớn hơn hoặc bằng 3");
     return;
   }
 
-  let dice1 = Math.floor(Math.random() * totalNumber) + 1;
-  let dice2 = Math.floor(Math.random() * totalNumber) + 1;
-  let dice3 = Math.floor(Math.random() * totalNumber) + 1;
+  const diceElements = [
+    document.getElementById("dice1"),
+    document.getElementById("dice2"),
+    document.getElementById("dice3"),
+  ];
 
-  document.getElementById("dice1").textContent = dice1;
-  document.getElementById("dice2").textContent = dice2;
-  document.getElementById("dice3").textContent = dice3;
+  // Start rolling animation
+  diceElements.forEach((dice) => dice.classList.add("rolling"));
+  const diceResults = randomizeDiceResults(totalNumber, rate1, rate2);
 
-  document.getElementById('content1').value = document.getElementById('dice1').textContent;
-  document.getElementById('content2').value = document.getElementById('dice2').textContent;
-  document.getElementById('content3').value = document.getElementById('dice3').textContent;
-
-  document.getElementById(
-    "result"
-  ).textContent = `Kết quả: ${dice1}, ${dice2}, ${dice3}`;
+  // Apply results to the dice elements
+  diceResults.forEach((result, index) => {
+    diceElements[index].textContent = result;
+  });
 });
+
+function randomizeDiceResults(totalNumber, rate1, rate2) {
+  let results = [];
+  for (let i = 0; i < 3; i++) {
+    results.push(Math.floor(Math.random() * totalNumber) + 1);
+  }
+
+  const duplicateChance = Math.random();
+  if (duplicateChance < rate1) {
+    // 5% chance to have duplicates
+    const tripleChance = Math.random();
+    if (tripleChance < rate2) {
+      // Within duplicates, 50% chance all are the same
+      const commonNumber = Math.floor(Math.random() * totalNumber) + 1;
+      results = [commonNumber, commonNumber, commonNumber];
+    } else {
+      // Otherwise, only two are the same
+      const duplicateIndex = Math.floor(Math.random() * results.length);
+      const commonNumber = Math.floor(Math.random() * totalNumber) + 1;
+      results[duplicateIndex] = commonNumber;
+      results[(duplicateIndex + 1) % 3] = commonNumber;
+    }
+  }
+  return results;
+}
