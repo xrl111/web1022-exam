@@ -158,6 +158,24 @@ switch($act)
         $cCfig -> updateConfig();
         break;
     }
+
+    case 'RelationshipClassAndQuesGrp':
+    {
+        $cGroup -> getAllDataClassAndQuesGrp();
+        break;
+    }
+    
+    case 'InsertRelationship':
+    {
+        $cGroup -> insertRelationship();
+        break;
+    }
+
+    case 'UpdateRelationship':
+    {
+        $cGroup -> updateRelationship();
+        break;
+    }
 };
 ?>
 <!DOCTYPE html>

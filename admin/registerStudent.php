@@ -25,12 +25,22 @@
             </div>
             <div class="form-group">
                 <label for="role">Class:</label>
-                <input type="class" id="class" name="class" required>
+                <select name="class" id="class">
+                    <?php
+                        foreach($listClass as $class)
+                        {
+                            ?>
+                                <option  value="<?php echo $class -> id  ?>"> <?php echo $class -> className ?> </option>
+                            <?php
+                        } 
+                    ?>
+                </select>
+                <!-- <input type="class" id="class" name="class" required> -->
             </div>
             <div class="form-group">
                 <label for="student_code">Student Code:</label>
                 <input type="text" id="student_code" name="student_code">
-            </div>
+            </div>  
             <div class="form-group"> 
                 <button type="submit" name="register-stu">Register</button>
             </div>

@@ -32,6 +32,13 @@
             return $this -> connect -> loadData();
         }
 
+        public function getClassNameAndID()
+        {
+            $sql = 'SELECT classes.className,classes.id FROM classes';
+            $this -> connect -> setQuery($sql);
+            return $this -> connect -> loadData();
+        }
+
         public function getDataByClassName($className)
         {
             $sql = 'SELECT * FROM classes WHERE className = ?';
