@@ -30,7 +30,7 @@
                         foreach($listClass as $class)
                         {
                             ?>
-                                <option  value="<?php echo $class -> id  ?>"> <?php echo $class -> className ?> </option>
+                                <option  value="<?php echo $class -> className  ?>"> <?php echo $class -> className ?> </option>
                             <?php
                         } 
                     ?>

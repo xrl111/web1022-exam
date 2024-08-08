@@ -39,11 +39,14 @@
                         }
                     ?>
                 </select>
-                <!-- <input type="class" id="class" name="class" required value="<?php echo $listStu -> class?>"> -->
             </div>
             <div class="form-group">
                 <label for="student_code">Student Code:</label>
                 <input type="text" id="student_code" name="student_code" value="<?php echo $listStu -> student_code?>">
+            </div>
+            <div class="form-group">
+                <label for="student_code">Password:</label>
+                <input type="text" id="password" name="password">
             </div>
             <div class="form-group">
                 <label for="student_code">Result 1:</label>

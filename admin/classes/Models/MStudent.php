@@ -33,7 +33,7 @@
 
         public function getDataFromUser($user)
         {
-            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE username = ? ";
+            $sql = "SELECT id,fullname,username,student_code,password,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE username = ? ";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData([$user],false);
         }
@@ -47,7 +47,7 @@
 
         public function getDataById($id)
         {
-            $sql = "SELECT id,fullname,username,student_code,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE id = ?";
+            $sql = "SELECT id,fullname,username,student_code,password,class,result_1,result_2,result_3,score,created_at,current_turn FROM student WHERE id = ?";
             $this -> connect -> setQuery($sql);
             return $this -> connect -> loadData([$id],false);
         }
@@ -66,11 +66,11 @@
             $this -> connect -> execute([$id, $fullname, $name, $stu_code ,$password, $class, $result_1, $result_2, $result_3,$score,$time,$current_turn]);
         }
 
-        public function updateData($fullname, $name, $stu_code, $class, $result_1, $result_2, $result_3,$score,$time, $id)
+        public function updateData($fullname, $name, $stu_code,$password, $class, $result_1, $result_2, $result_3,$score,$time, $id)
         {
-            $sql = 'UPDATE student SET fullname = ?, username = ?,student_code = ?, class = ?, result_1 = ?,result_2 = ?,result_3 = ?,score = ?, created_at = ? WHERE id = ?';
+            $sql = 'UPDATE student SET fullname = ?, username = ?,student_code = ?,password = ?, class = ?, result_1 = ?,result_2 = ?,result_3 = ?,score = ?, created_at = ? WHERE id = ?';
             $this -> connect -> setQuery($sql);
-            $this -> connect -> execute([$fullname, $name, $stu_code, $class, $result_1, $result_2, $result_3,$score,$time, $id]);
+            $this -> connect -> execute([$fullname, $name, $stu_code,$password,$class, $result_1, $result_2, $result_3,$score,$time, $id]);
         }
 
         public function updateResult($result_1, $result_2, $result_3, $username)
