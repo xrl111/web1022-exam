@@ -49,7 +49,7 @@
             </button>
 
             <div class="listStu">
-                <form action="classes.php" method="post">
+                <form action="?act=DeleteStudentSelected" method="post">
                         <div class="list" border=1>
                             
                             <table>

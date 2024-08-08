@@ -94,14 +94,28 @@
             $cClas = new Classes();
             $cQuesGrp = new QuestionsGroup();
             $listQuesGrp = $cQuesGrp -> getIdAndNameQuesGrp();
+            $listClassName = $cClas -> getClassName();
             if(isset($_POST['register-clas']))
             {
                 if(isset($_POST['nameClass']) && isset($_POST['startDay']) && isset($_POST['questionGroup']) && isset($_POST['endDay']))
                 { 
                     $cClas -> setInsertData(null,$_POST['nameClass'],$_POST['questionGroup'],$_POST['created_at'],$_POST['startDay'],$_POST['endDay']);
-                    header('Location: ?act=listClass&id=WD19320');
+                    if(isset($listClassName))
+                    {
+                        foreach($listClassName as $className)
+                        {
+                            header('Location: index.php?act=listClass&id='.$className -> className);
+                            exit();
+                        }
+                    }else
+                    {
+                        header('Location: index.php?act=listClass');
+                        exit();
+                    }
+                    // header('Location: ?act=listClass&id=');
                 }
             }
+            
             include_once 'registerClass.php';
         }
 
@@ -125,17 +139,29 @@
             $cClass = new Classes();
             $cStu = new Students();
             $listClass = $cClass -> getClassNameAndID();
+            $listClassName = $cClass -> getClassName();
             if(isset($_POST['register-stu']))
             {
                 if(empty($_POST['fullname']) || empty($_POST['username']) || empty($_POST['password']) ||empty($_POST['class']))
                 {
-                    return false;
+                    return false;   
                 }else
                 {
                     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                     $current_turn = 0;
                     $cStu -> setInsertData(null,$_POST['fullname'],$_POST['username'],$_POST['student_code'],$password,$_POST['class'],null,null,null,null,null,$current_turn);
-                    
+                    if(isset($listClassName))
+                    {
+                        foreach($listClassName as $className)
+                        {
+                            header('Location: index.php?act=listClass&id='.$className -> className);
+                            exit();
+                        }
+                    }else
+                    {
+                        header('Location: index.php?act=listClass');
+                        exit();
+                    }
                     // header('Location: ?act=listClass&id=WD19320');
                 }
             }
@@ -150,13 +176,33 @@
             $id = $_GET['id'];
             $listStu = $cStu -> getDataById($id);
             $listClass = $cClass -> getClassNameAndID();
+            $listClassName = $cClass -> getClassName();
             if(isset($id))
             {
                 if(isset($_POST['update-stu']))
                 {
-                    // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $cStu -> updateData($_POST['fullname'],$_POST['username'],$_POST['student_code'],$_POST['class'],$_POST['result1'],$_POST['result2'],$_POST['result3'],$_POST['score'],null,$id);
-                    header('Location: ?act=listClass&id=WD19320');
+                    if(isset($_POST['password']))
+                    {
+                        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    }else
+                    {
+                        $password = $listStu -> password;
+                    }
+
+                    $cStu -> updateData($_POST['fullname'],$_POST['username'],$_POST['student_code'],$password,$_POST['class'],$_POST['result1'],$_POST['result2'],$_POST['result3'],$_POST['score'],null,$id);
+                    
+                    if(isset($listClassName))
+                    {
+                        foreach($listClassName as $className)
+                        {
+                            header('Location: index.php?act=listClass&id='.$className -> className);
+                            exit();
+                        }
+                    }else
+                    {
+                        header('Location: index.php?act=listClass');
+                        exit();
+                    }
                 }
             }
             include_once 'updateStudent.php';
@@ -176,10 +222,10 @@
                     if($_POST['point'] <= $listCfig -> Totalscore && $_POST['point'] >= 0)
                     {
                         $cStu -> updateScore($_POST['point'], $_POST['id']);
-                        header('Location: ?act=listClass&id=WD19320');
+                        // header('Location: ?act=listClass&id=WD19320');
                     }else
                     {
-                        header('Location: ?act=listClass&id=WD19320');
+                        // header('Location: ?act=listClass&id=WD19320');
                     }
                 }else
                 {
@@ -193,17 +239,31 @@
 
         public function DeleteData()
         {
+            $cClass = new Classes();
+            $listClassName = $cClass -> getClassName();
             if(isset($_GET['id']))
             {
                 $cStu = new Students();
                 $id = $_GET['id'];
                 $cStu -> deleteData($id,$id);
-                header('Location: ?act=listClass&id=WD19320');
+                if(isset($listClassName))
+                    {
+                        foreach($listClassName as $className)
+                        {
+                            header('Location: index.php?act=listClass&id='.$className -> className);
+                            exit();
+                        }
+                    }else
+                    {
+                        header('Location: index.php?act=listClass');
+                        exit();
+                    }
             }
         }
 
         public function DeleteDataSelected()
         {
+            $cClass = new Classes();
             $cStu = new Students();
             if(isset($_POST['btn-delSelected']))
             {
@@ -211,7 +271,7 @@
                 foreach($deletedItems as $deletedItem)
                 {
                     $cStu -> deleteData($deletedItem,$deletedItem);
-                    header('Location: ?act=listClass&id=WD19320');
+                    // header('Location: ?act=listClass&id=WD19320');
                 }
             }
         }

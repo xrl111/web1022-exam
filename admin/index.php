@@ -101,11 +101,11 @@ switch($act)
         $cStu -> login();
         break;
     }
-    case 'SetPoint':
-    {
-        $cClass -> SetPoint();
-        break;
-    }
+    // case 'SetPoint':
+    // {
+    //     $cClass -> SetPoint();
+    //     break;
+    // }
 
     case 'ResetCurrentTurn':
     {
@@ -188,15 +188,6 @@ switch($act)
     <link rel="stylesheet" type="text/css" href="./styles/styles.css">
 </head>
 <body>
-    <?php
-        if(empty($_GET['act']))
-        {
-            ?>
-                <h1>ĐÂY LÀ TRANG ADMIN</h1>
-                <button><a href="?act=listClass&id=WD19320">QUẢN TRỊ</a> </button>
-            <?php
-        }
-    ?>
 </body>
 </html>
 
