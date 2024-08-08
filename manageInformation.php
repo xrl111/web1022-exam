@@ -61,7 +61,6 @@ form
   <a href="?act=ManageInformation">Manage Information</a>
   <a href="?act=ResetPassword">Reset Password</a>
   <a href="?act=UpdateInformation">Update Information</a>
-  <a href="?act=DiceGame">Dice Game</a>
   <a href="logout.php">Log Out</a>
 </div>
 
@@ -80,14 +79,22 @@ form
                             <table>
                                 <tr class="title-table" style="background-color: rgba(172, 255, 47, 0.589);">
                                     <th>Lớp</th>
-                                    <th>điểm</th>   
-                                    <th></th>
+                                    <th>điểm</th>
+                                    <?php
+                                        if($currentDate >= $startDate && $currentDate <= $endDate)
+                                        {
+                                            ?>
+                                                <th></th>
+                                            <?php
+                                        }   
+                                    ?>
                                 </tr>
                                   <tr>
                                     <td class="class-name"> <?php echo $listStu -> class  ?> </td>
                                     <td class="totalScore"> <?php if($listStu -> score){echo $listStu -> score; }else{ echo '0';} ?> </td>
                                     <?php
-                                        if($currentDate >= $listDay -> startday && $currentDate <= $listDay -> endday)
+                                    
+                                        if($currentDate >= $startDate && $currentDate <= $endDate)
                                         {
                                             ?>
                                                 <td class="btn-setting-delete">

@@ -83,7 +83,9 @@
                 $listStu = $cStu -> getDataFromUser($_SESSION['username']);
                 $nameClass = 'WD19320';
                 $listDay = $cClas -> getDayExam($nameClass);
-                $currentDate = date('Y-m-d');
+                $currentDate = new DateTime(); // Lấy ngày hiện tại
+                $startDate = new DateTime($listDay->startday); // Ngày bắt đầu
+                $endDate = new DateTime($listDay->endday); // Ngày kết thúc
                 include_once 'manageInformation.php';
             }
         }

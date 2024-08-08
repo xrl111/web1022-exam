@@ -4,22 +4,36 @@ require_once "./classes/Models/config.php";
 require_once './classes/Controllers/CClass.php';
 require_once './classes/Controllers/CStudent.php';
 require_once './classes/Models/MStudent.php';
+require_once './classes/Models/MClass.php';
 require_once './classes/Controllers/CQuestion.php';
+require_once './classes/Controllers/CConfig.php';
 require_once './classes/Controllers/Cgroup_question.php';
-
-if(!isLoggedIn() || !isAdmin()) {
-    redirectToLogin();
-}else if (!isset($_GET['act']) || $_GET['act'] === '/') 
-{
-    header('Location: index.php?act=listClass');
-    exit();
-}
-// $page = $_GET['page'] ?? "classes";
 $act = $_GET['act'] ?? '/';
 $cClass = new CClasses();
+$mClass = new Classes();
 $cStu = new CStudents();
 $cQues = new CQuestions();
+$cCfig = new CConfig();
 $cGroup = new CGroups();
+$requestUri = $_SERVER['REQUEST_URI'];
+if(!isLoggedIn() || !isAdmin()) {
+    redirectToLogin();
+}else if (!isset($_GET['act']) || $_GET['act'] === '/' || $_GET['act'] === '') 
+{
+    $listClassName = $mClass -> getClassName();
+    if(isset($listClassName))
+    {
+        foreach($listClassName as $className)
+        {
+            header('Location: index.php?act=listClass&id='.$className -> className);
+            exit();
+        }
+    }else
+    {
+        header('Location: index.php?act=listClass');
+        exit();
+    }
+}
 switch($act)
 {
     case 'listClass':
@@ -63,12 +77,6 @@ switch($act)
         $cClass -> DeleteData();
         break;
     }
-
-    // case 'UpdateScore':
-    // {
-    //     $cClass -> SetPointTest();
-    //     break;
-    // }
 
     case 'DeleteStudentSelected':
     {
@@ -118,20 +126,38 @@ switch($act)
     }
 
     case 'showAllGroup':
+    {
         $cGroup -> showAlltDataGroup();
         break;
+    }
 
     case 'insertGroup':
+    {
         $cGroup -> addGroups();
         break;
+    }
 
     case 'editGroup':
+    {
         $cGroup -> editGroup();
         break;
+    }
 
-        case 'delGroup':
-            $cGroup -> delGroup();
-            break;
+    case 'delGroup':
+    {
+        $cGroup -> delGroup();
+        break;
+    }
+    case 'Config':
+    {
+        $cCfig -> getDataConfig();
+        break;
+    }
+    case 'UpdateConfig':
+    {
+        $cCfig -> updateConfig();
+        break;
+    }
 };
 ?>
 <!DOCTYPE html>

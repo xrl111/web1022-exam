@@ -17,7 +17,6 @@
   <a href="?act=ManageInformation">Manage Information</a>
   <a href="?act=ResetPassword">Reset Password</a>
   <a href="?act=UpdateInformation">Update Information</a>
-  <a href="?act=DiceGame">Dice Game</a>
   <a href="logout.php">Log Out</a>
 </div>
 

@@ -30,25 +30,52 @@
                         $student_code = $stu -> student_code;
                         if(strtoupper($student_code) == strtoupper($idStu))
                         {
+                            $emptyData = false;
                             $hidePag = true;
                             $listStu = $cStu -> getDataByStudentCode($stu -> student_code);
-                            include_once 'classes.php';
                             break;
+                        }else
+                        {
+                            $emptyData = true;
+                            $error = 'NO DATA';
                         }
                     }
+                    include_once 'classes.php';
                 }
             }else
             {
+                $listClassName = $cClas -> getClassName();
+                $listClas = $cClas -> getAllData();
+                $hidePag = false;
+                $page = isset($_GET['page']) ? $_GET['page'] : 1;
+                $per_Page = 10;
+                $from_Page = ($page - 1) * $per_Page;
                 if(isset($id))
                 {
-                    $listClas = $cClas -> getAllData();
-                    $hidePag = false;
-                    $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                    $per_Page = 10;
-                    $from_Page = ($page - 1) * $per_Page;
-                    $total_pages = ceil(count($cStu -> getAllDataById($id)) / $per_Page);
-                    $listStu = $cStu -> getAllDataByLimit($id,$from_Page,$per_Page);
+                    foreach($listClassName as $classname)
+                    {
+                        if($classname -> className == $id)
+                        {
+                            $emptyData = false;
+                            $total_pages = ceil(count($cStu -> getAllDataById($id)) / $per_Page); 
+                            $listStu = $cStu -> getAllDataByLimit($id,$from_Page,$per_Page);
+                            if(empty($listStu))
+                            {
+                                $emptyData = true;
+                            }
+                            break;
+                        }else
+                        {
+                            $emptyData = true;
+                            $error = 'NO DATA';
+                            // var_dump($emptyData);
+                        }
+                    }
                     include_once 'classes.php';
+                }else
+                {
+                    $emptyData = true;
+                    $error = 'NO DATA';
                 }
             }
         }

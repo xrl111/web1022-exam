@@ -11,6 +11,8 @@ class Questions{
         return $this->connect->loadData();
     }
 
+    
+
     public function getAllQuestionsByNumber($number){
         $sql = 'SELECT * FROM questions WHERE number= ?';
         $this->connect->setQuery($sql);

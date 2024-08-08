@@ -20,12 +20,11 @@
             $cQuesGrp = new QuestionsGroup();
             $listQuesGrp = $cQuesGrp -> getAllQuestionsGroup();
             $listQues = $cQues -> getAllQuestions();
-            $id = $_GET['id'] ?? '1';
+            $id = $_GET['id'] ?? '';
             if (!isLoggedIn() || !isAdmin()) {
                 redirectToLogin();
             }else if(isset($_POST['search']))
             {
-                
                 if(isset($_POST['idQues']))
                 {
                     $idQues = $_POST['idQues'];
@@ -33,23 +32,56 @@
                     {
                         if($idQues == $ques -> number)
                         {
+                            $emptyData = false;
                             $hidePag = true;
                             $listGrp = $cQues -> getAllQuestionsByNumber($idQues);           
-                            include_once 'question_groups.php';
                             break;
+                        }else
+                        {
+                            $emptyData = true;
+                            $error = 'NO DATA';
                         }
                     }
+                }else
+                {
+                    $emptyData = true;
+                    $error = 'NO DATA';
                 }
+                include_once 'question_groups.php';
             }else
             {
                 $hidePag = false;
+                $listNameQuesGroup = $cQuesGrp -> getIdQuestionGroup();
                 $page = isset($_GET['page']) ? $_GET['page'] : 1;
                 $per_Page = 10;
                 $from_Page = ($page - 1) * $per_Page;
-                $total_pages = ceil(count($cQues -> getAllQuestionsById($id)) / $per_Page);
-                $listGrp = $cQues -> getAllDataByLimit($id,$from_Page,$per_Page);
+                if(isset($id))
+                {
+                    foreach($listNameQuesGroup as $quesGrp)
+                    {
+                        if($quesGrp -> id == $id)
+                        {
+                            $emptyData = false;
+                            $total_pages = ceil(count($cQues -> getAllQuestionsById($id)) / $per_Page);
+                            $listGrp = $cQues -> getAllDataByLimit($id,$from_Page,$per_Page);
+                            if(empty($listGrp))
+                            {
+                                $emptyData = true;
+                            }
+                            break;
+                        }else
+                        {
+                            $emptyData = true;
+                            $error = 'NO DATA';
+                        }
+                    }
+                    include_once 'question_groups.php';
+                }else
+                {
+                    $emptyData = true;
+                    $error = 'NO DATA';
+                }
             }
-            include_once 'question_groups.php';
         }
 
         public function insertData()

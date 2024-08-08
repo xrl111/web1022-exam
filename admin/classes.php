@@ -25,12 +25,21 @@
                 ?>
             </div>
 
-            <h2><?php echo $_GET['id'] ?></h2>
-            <form action="" method="post" class="search-form">
-                <div class="search-item"><label for="">Search Student ID</label></div>
-                <div class="search-item"><input type="text" name="idStu" ></div>
-                <div class="search-item"><input type="submit" name="search" value="Search"></div>
-            </form>
+            <?php
+                if($emptyData == false)
+                {
+                    ?>
+                        <h2><?php echo $_GET['id'] ?></h2>
+                        <form action="" method="post" class="search-form">
+                            <div class="search-item"><label for="">Search Student ID</label></div>
+                            <div class="search-item"><input type="text" name="idStu" ></div>
+                            <div class="search-item"><input type="submit" name="search" value="Search"></div>
+                        </form>
+                    <?php
+                }
+                
+            ?>
+            
             
             <button id="registerClass">
                 <a href="?act=AddClass">REGISTER CLASS</a>
@@ -59,6 +68,22 @@
 
 
                                 <?php
+                                if($emptyData == true)
+                                {
+                                    ?>
+                                    <tr>
+                                            <td class="btn-check"><?php echo $error ?></td>
+                                            <td class="name"><?php echo $error ?></td>
+                                            <td class="student-code"><?php echo $error ?></td>
+                                            <td class="class"><?php echo $error ?></td>
+                                            <td class="score1"><?php echo $error ?></td>
+                                            <td class="score2"><?php echo $error ?></td>
+                                            <td class="score3"><?php echo $error ?></td>
+                                            <td class="totalScore"><?php echo $error ?></td>
+                                    </tr>
+                                    <?php
+                                }else
+                                {
                                     foreach($listStu as $stu)
                                     {
                                         ?>
@@ -81,17 +106,24 @@
                                         </tr>
                                         <?php
                                     }
+                                }
                                 ?>
                             </table>
                         </div>
 
-
-                        <div class="btn-func">
-                            <button type="button" onclick="selectAll()">Chọn tất cả</button>
-                            <button type="button" onclick="deselectAll()">Bỏ chọn tất cả</button>
-                            <button onclick="confirmDeleted('?act=DeleteStudentSelected')" type="submit" name="btn-delSelected">Xoá các mục đã chọn</button>
-                            <button type="button"><a href="?act=AddStudent">Nhập thêm</a></button>
-                        </div>
+                    <?php
+                        if($emptyData == false)
+                        {
+                            ?>
+                            <div class="btn-func">
+                                <button type="button" onclick="selectAll()">Chọn tất cả</button>
+                                <button type="button" onclick="deselectAll()">Bỏ chọn tất cả</button>
+                                <button onclick="confirmDeleted('?act=DeleteStudentSelected')" type="submit" name="btn-delSelected">Xoá các mục đã chọn</button>
+                                <button type="button"><a href="?act=AddStudent">Nhập thêm</a></button>
+                            </div>
+                            <?php
+                        }
+                    ?>
 
                 </form>
             </div>
@@ -102,25 +134,29 @@
 
         <div class="pagination">
             <?php
-                if($hidePag == false)
+                if($emptyData == false)
                 {
-                    ?>
-                        <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=1">FIRST</a>
-                    <?php
-                
-                
-                    for($i = 1; $i <= $total_pages; $i++)
+                    if($hidePag == false)
                     {
-                        ?>  
-                            <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=<?php echo $i ?>"> <?php echo $i  ?> </a>
+                        ?>
+                            <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=1">FIRST</a>
+                        <?php
+                    
+                    
+                        for($i = 1; $i <= $total_pages; $i++)
+                        {
+                            ?>  
+                                <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=<?php echo $i ?>"> <?php echo $i  ?> </a>
+                            <?php
+                        }
+                    
+                    
+                        ?>
+                            <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=<?php echo $total_pages ?>">LAST</a>
                         <?php
                     }
-                
-                
-                    ?>
-                        <a href="?act=listClass&id=<?php echo $_GET['id'] ?>&page=<?php echo $total_pages ?>">LAST</a>
-                    <?php
                 }
+                
             ?>
         </div>
 

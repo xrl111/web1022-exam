@@ -11,6 +11,12 @@ class QuestionsGroup{
         return $this->connect->loadData();
     }
 
+    public function getIdQuestionGroup(){
+        $sql = 'SELECT question_groups.id FROM question_groups';
+        $this->connect->setQuery($sql);
+        return $this->connect->loadData();
+    }
+
     public function getAllQuestionGroupById($id){
         $sql = 'SELECT * FROM question_groups WHERE id= ?';
         $this->connect->setQuery($sql);

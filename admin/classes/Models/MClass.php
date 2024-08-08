@@ -25,6 +25,13 @@
             $this -> connect -> execute([$id, $className, $question_group, $time,$startDay,$endDay]);
         }
 
+        public function getClassName()
+        {
+            $sql = 'SELECT classes.className FROM classes';
+            $this -> connect -> setQuery($sql);
+            return $this -> connect -> loadData();
+        }
+
         public function getDataByClassName($className)
         {
             $sql = 'SELECT * FROM classes WHERE className = ?';
