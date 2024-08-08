@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Aug 04, 2024 at 05:32 PM
+-- Generation Time: Aug 08, 2024 at 04:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,16 +53,18 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL,
   `className` varchar(255) DEFAULT NULL,
   `question_group` int(11) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` date NOT NULL DEFAULT current_timestamp(),
+  `startday` date DEFAULT NULL,
+  `endday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `classes`
 --
 
-INSERT INTO `classes` (`id`, `className`, `question_group`, `created_at`) VALUES
-(1, 'WD19320', 1, '2024-08-01 14:41:51'),
-(2, 'WD19321', 1, '2024-08-01 16:06:41');
+INSERT INTO `classes` (`id`, `className`, `question_group`, `created_at`, `startday`, `endday`) VALUES
+(1, 'WD19320', 1, '2024-08-06', '2024-08-06', '2024-08-08'),
+(2, 'WD19321', 1, '2024-08-01', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,15 +94,17 @@ INSERT INTO `classes_question_groups` (`classes_question_group`, `question_group
 CREATE TABLE `config` (
   `id` int(11) NOT NULL,
   `limit` int(11) DEFAULT NULL,
-  `Totalscore` int(2) NOT NULL
+  `Totalscore` int(2) NOT NULL,
+  `rate1` int(11) DEFAULT NULL,
+  `rate2` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `config`
 --
 
-INSERT INTO `config` (`id`, `limit`, `Totalscore`) VALUES
-(1, 3, 10);
+INSERT INTO `config` (`id`, `limit`, `Totalscore`, `rate1`, `rate2`) VALUES
+(1, 4, 10, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -176,7 +180,8 @@ CREATE TABLE `question_groups` (
 --
 
 INSERT INTO `question_groups` (`id`, `name`) VALUES
-(1, 'ListQuestions2024');
+(1, 'ListQuestions2024'),
+(2, 'TEST');
 
 -- --------------------------------------------------------
 
@@ -276,8 +281,8 @@ INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`,
 (81, 'Phạm Minh Phú', 'phamminhphu', 'PH53141', 'ghi012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (82, 'Trần Thị Yến', 'tranthiyen', 'PH53142', 'jkl345', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (83, 'Lê Văn Trừ', 'levanhieu897', 'PH53143', '123123', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 17:24:03', 0),
-(84, 'Lê Văn Hiệu', 'levanhieu', 'PH53067', '$2y$10$tHXaJhzmQlQ2ZM8oOvENVekPa5l3dcCeAqKRoGbZ1yuZlhKivE/di', 'WD19320', 12, 30, 24, NULL, '2024-08-03 13:37:28', 3),
-(85, 'admin', 'admin2', 'PH00000', '$2y$10$.mvf7Q3Ijza2o53YRHSs2.tOAmF121yCgO3cdnr5a3N3u4434wiQe', 'WD19320', 2, 36, 19, 0, NULL, 2);
+(84, 'Lê Văn Hiệu', 'levanhieu', 'PH53067', '$2y$10$tHXaJhzmQlQ2ZM8oOvENVekPa5l3dcCeAqKRoGbZ1yuZlhKivE/di', 'WD19320', 17, 16, 5, NULL, '2024-08-03 13:37:28', 4),
+(85, 'admin', 'admin2', 'PH00000', '$2y$10$.mvf7Q3Ijza2o53YRHSs2.tOAmF121yCgO3cdnr5a3N3u4434wiQe', 'WD19320', 2, 36, 19, 0, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -437,7 +442,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `config`
@@ -455,7 +460,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `question_groups`
 --
 ALTER TABLE `question_groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `student`
