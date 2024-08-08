@@ -27,12 +27,16 @@
 
     <div class="main">
         <div id="container">
-            <h1>Manage Information</h1>
-            <form action="" method="POST">
+            <h1>Update Information</h1>
+            <form action="" method="POST" class="update-form">
                 <div class="list">
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" id="fullname" name="fullname" required>
-                    <button style="cursor: pointer;" type="submit" name="update" value="Update">Update</button>
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <button style="cursor: pointer;" type="submit" name="update" value="Update">Update</button>
+                    </div>    
                 </div>
             </form>
         </div>
@@ -43,13 +47,13 @@
 <script>
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("container").style.marginLeft = "250px";
+  document.getElementById("container").style.margin = "20px auto";
   document.getElementById("header").style.marginLeft = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("container").style.marginLeft = "0px";
+  document.getElementById("container").style.margin = "20px auto";
   document.getElementById("header").style.marginLeft = "0px";
 }
 </script>

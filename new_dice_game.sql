@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `fullname`, `username`, `password`, `created_at`) VALUES
 (1, 'Lê Văn Hiệu', 'admin', '$2y$10$/wz2n74.iDH30RzWXpu6ouEgv6WlpxMTeMTfhYOb7zj4IUjtX8.6m', '2024-08-01 10:25:18'),
-(3, 'Hieue lel', 'admin2', 'admin2', '2024-08-03 10:34:12');
+(3, 'Hieue lel', 'admin2', '$2y$10$/wz2n74.iDH30RzWXpu6ouEgv6WlpxMTeMTfhYOb7zj4IUjtX8.6m', '2024-08-03 10:34:12');
 
 -- --------------------------------------------------------
 
@@ -53,9 +53,9 @@ CREATE TABLE `classes` (
   `id` int(11) NOT NULL,
   `className` varchar(255) DEFAULT NULL,
   `question_group` int(11) DEFAULT NULL,
-  `created_at` date NOT NULL DEFAULT current_timestamp(),
-  `startday` date DEFAULT NULL,
-  `endday` date DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `startday` timestamp DEFAULT NULL,
+  `endday` timestamp DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -40,14 +40,14 @@
                 
             ?>
             
-            
+            <div >
             <button id="registerClass">
                 <a href="?act=AddClass">REGISTER CLASS</a>
             </button>
             <button id="updateClass">
                 <a href="?act=UpdateClass&id=<?php echo $id ?>">UPDATE CLASS</a>
             </button>
-
+            </div>
             <div class="listStu">
                 <form action="classes.php" method="post">
                         <div class="list" border=1>

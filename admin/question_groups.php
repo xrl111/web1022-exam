@@ -13,7 +13,6 @@
         <div class="content">
             <h2>Danh sách Nhóm</h2>
             <div class="list">
-                <a href="?act=insertGroup"><button>Them Group</button></a>
                 <?php 
                     foreach($listQuesGrp as $ques)
                     {
@@ -37,7 +36,11 @@
                     <?php
                 }
             ?>
-            
+            <div>
+                <button id="registerQuestion">
+                        <a href="?act=insertGroup">Them Group</a>
+                </button>
+            </div>
 
             <div class="listQues">
                 <form action="?act=DeleteQuestionSelected" method="post">

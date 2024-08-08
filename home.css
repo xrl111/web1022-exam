@@ -1,87 +1,186 @@
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Times New Roman", Times, serif;
   margin: 0;
   padding: 0;
+  background-color: #f4f4f4;
 }
 
-.sidenav {
+#mySidenav {
   height: 100%;
   width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: #007bff;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
 }
 
-.sidenav a {
+#mySidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #fff;
   display: block;
   transition: 0.3s;
 }
 
-.sidenav a:hover {
+#mySidenav a:hover {
   color: #f1f1f1;
 }
 
-.sidenav .closebtn {
+#mySidenav .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
 }
+
 #header {
-  display: flex;
-  justify-content: space-between;
-  padding: 0px 20px;
-  background-color: #818181;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  position: relative;
 }
 
-#container,
-#header {
-  transition: margin-left 0.5s;
-  padding: 16px;
+#header h2 {
+  margin: 0;
+  font-size: 24px;
 }
-#container > h1 {
-  text-align: center;
+
+#header span {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
+
 #container {
-  width: 50%;
-}
-.main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
 }
 
-#diceContainer {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-.dice {
-  width: 90px;
-  height: 90px;
-  line-height: 90px;
+h1 {
   text-align: center;
-  font-size: 30px;
-  border: 1px solid black;
-  margin-left: 20px;
+  color: #333;
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
+.list {
+  width: 100%;
+}
+
+form {
+  margin: 0;
+}
+
+.list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.list table tr {
+  height: 50px;
+  background-color: rgba(128, 128, 128, 0.375);
+}
+
+.list table th,
+.list table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.list table th {
+  background-color: rgba(172, 255, 47, 0.589);
+  color: #333;
+}
+
+.list table tr .checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.list table .btn-check,
+.id,
+.btn-setting-delete,
+.class,
+.score1,
+.score2,
+.score3,
+.totalScore {
+  text-align: center;
+  font-size: 18px;
+}
+
+.btn-setting-delete button {
+  width: 100px;
+  height: 40px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-setting-delete button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-setting-delete button:hover {
+  background-color: #0056b3;
+}
+
+.register-form .update-form {
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-group button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+  background-color: #0056b3;
 }
