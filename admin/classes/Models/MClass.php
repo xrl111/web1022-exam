@@ -52,6 +52,47 @@
             $this -> connect -> setQuery($sql);
             $this -> connect -> execute([$className, $question_group, $time,$startday,$endday, $id]);
         }
+
+        public function createTriggerForUpdate()
+        {
+            $sql = "
+            CREATE TRIGGER update_classes_question_groups_after_classes
+            AFTER UPDATE ON classes
+            FOR EACH ROW
+            BEGIN
+                UPDATE classes_question_groups
+                SET classes_question_groups.question_groups_id = NEW.question_group
+                WHERE classes_question_groups.classes_question_group = NEW.id;
+            END;
+            ";
+            $this->connect->setQuery($sql);
+            $this->connect->execute();
+        }
+
+        public function createTriggerForInsert()
+        {
+            // Thay đổi dấu phân cách để định nghĩa trigger
+            $this->connect->setQuery("DELIMITER //");
+            $this->connect->execute();
+
+            // Tạo trigger
+            $sql = "
+                CREATE TRIGGER insert_classes_question_groups_after_classes
+                AFTER INSERT ON classes
+                FOR EACH ROW
+                BEGIN
+                    INSERT INTO classesx_question_groups (classes_question_group, question_groups_id)
+                    VALUES (NEW.id, NEW.question_group);
+                END;
+            ";
+            $this->connect->setQuery($sql);
+            $this->connect->execute();
+
+            // Khôi phục dấu phân cách về ;
+            $this->connect->setQuery("DELIMITER ;");
+            $this->connect->execute();
+        }
+
         public function deleteData($id,$id2)
         {
             $sql = 'DELETE FROM student_classes WHERE student_class = ?;DELETE FROM classes WHERE id = ?;';

@@ -33,6 +33,8 @@
                 session_start();
                 $cStu = new Students();
                 $cAdm = new Admin();
+                $cClas = new Classes();
+                $listClassName = $cClas -> getClassName();
                 $username = trim($_POST['username']?? "");
                 $password = trim($_POST['password']?? "");
                 $error = '';
@@ -51,9 +53,21 @@
                         $_SESSION['user_id'] = $listAd -> id;
                         $_SESSION['username'] = $listAd -> username;
                         $_SESSION['user_role'] = 'admin';
-                        header("Location: ./admin/index.php?act=listClass&id=WD19320");
-                        exit();
-                    }
+                        if(isset($listClassName))
+                        {
+                            foreach($listClassName as $className)
+                            {
+                                header('Location: ./admin/index.php?act=listClass&id='.$className -> className);
+                                exit();
+                            }
+                        }else
+                        {
+                            header('Location: ./admin/index.php?act=listClass');
+                            exit();
+                        }
+                        // header("Location: ./admin/index.php?act=listClass&id=WD19320");
+                        // exit();
+                        }
     
                     if ($listStu && password_verify($password, $listStu -> password) ) 
                     {

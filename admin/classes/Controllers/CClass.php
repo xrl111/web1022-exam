@@ -100,6 +100,7 @@
                 if(isset($_POST['nameClass']) && isset($_POST['startDay']) && isset($_POST['questionGroup']) && isset($_POST['endDay']))
                 { 
                     $cClas -> setInsertData(null,$_POST['nameClass'],$_POST['questionGroup'],$_POST['created_at'],$_POST['startDay'],$_POST['endDay']);
+                    $cClas -> createTriggerForInsert();
                     if(isset($listClassName))
                     {
                         foreach($listClassName as $className)
@@ -129,7 +130,8 @@
             if(isset($_POST['register-clas']))
             {
                 $cClas -> updateData($_POST['className'],$_POST['questionGroup'],$_POST['created_at'],$_POST['startDay'],$_POST['endDay'],$id);
-                header('Location: ?act=listClass&id='.$id);
+                // $cClas -> createTriggerForUpdate();
+                header('Location: ?act=listClass&id='.$id); 
             }
             include_once 'updateClass.php'; 
         }
@@ -162,7 +164,6 @@
                         header('Location: index.php?act=listClass');
                         exit();
                     }
-                    // header('Location: ?act=listClass&id=WD19320');
                 }
             }
   
@@ -208,32 +209,32 @@
             include_once 'updateStudent.php';
         }
         
-        public function SetPoint()
-        {
-            $cStu = new Students();
-            $cCfig = new Config();
-            $id = 1;
-            $listCfig = $cCfig -> getAllDataById($id);
-            $listStu = $cStu -> getAllData();
-            if(isset($_POST['setPoint']))
-            {
-                if(isset($_POST['point']) && isset($_POST['id']))
-                {
-                    if($_POST['point'] <= $listCfig -> Totalscore && $_POST['point'] >= 0)
-                    {
-                        $cStu -> updateScore($_POST['point'], $_POST['id']);
-                        // header('Location: ?act=listClass&id=WD19320');
-                    }else
-                    {
-                        // header('Location: ?act=listClass&id=WD19320');
-                    }
-                }else
-                {
-                    echo 'Chưa nhập dữ liệu';
-                }
-            }
+        // public function SetPoint()
+        // {
+        //     $cStu = new Students();
+        //     $cCfig = new Config();
+        //     $id = 1;
+        //     $listCfig = $cCfig -> getAllDataById($id);
+        //     $listStu = $cStu -> getAllData();
+        //     if(isset($_POST['setPoint']))
+        //     {
+        //         if(isset($_POST['point']) && isset($_POST['id']))
+        //         {
+        //             if($_POST['point'] <= $listCfig -> Totalscore && $_POST['point'] >= 0)
+        //             {
+        //                 $cStu -> updateScore($_POST['point'], $_POST['id']);
+        //                 // header('Location: ?act=listClass&id=WD19320');
+        //             }else
+        //             {
+        //                 // header('Location: ?act=listClass&id=WD19320');
+        //             }
+        //         }else
+        //         {
+        //             echo 'Chưa nhập dữ liệu';
+        //         }
+        //     }
             
-        }
+        // }
 
         
 
@@ -265,14 +266,26 @@
         {
             $cClass = new Classes();
             $cStu = new Students();
+            $listClassName = $cClass -> getClassName();
             if(isset($_POST['btn-delSelected']))
             {
                 $deletedItems = isset($_POST['checkboxes']) ? $_POST['checkboxes'] : [];
                 foreach($deletedItems as $deletedItem)
                 {
                     $cStu -> deleteData($deletedItem,$deletedItem);
-                    // header('Location: ?act=listClass&id=WD19320');
                 }
+            }
+            if(isset($listClassName))
+            {
+                foreach($listClassName as $className)
+                {
+                    header('Location: index.php?act=listClass&id='.$className -> className);
+                    exit();
+                }
+            }else
+            {
+                header('Location: index.php?act=listClass');
+                exit();
             }
         }
     }
