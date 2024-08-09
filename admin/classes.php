@@ -72,58 +72,53 @@
                                 {
                                     ?>
                                     <tr>
-                                            <td class="btn-check"><?php echo $error ?></td>
-                                            <td class="name"><?php echo $error ?></td>
-                                            <td class="student-code"><?php echo $error ?></td>
-                                            <td class="class"><?php echo $error ?></td>
-                                            <td class="score1"><?php echo $error ?></td>
-                                            <td class="score2"><?php echo $error ?></td>
-                                            <td class="score3"><?php echo $error ?></td>
-                                            <td class="totalScore"><?php echo $error ?></td>
+                                            <td class="btn-check">NO DATA</td>
+                                            <td class="name">NO DATA</td>
+                                            <td class="student-code">NO DATA</td>
+                                            <td class="class">NO DATA</td>
+                                            <td class="score1">NO DATA</td>
+                                            <td class="score2">NO DATA</td>
+                                            <td class="score3">NO DATA</td>
+                                            <td class="totalScore">NO DATA</td>
                                     </tr>
                                     <?php
                                 }else
                                 {
-                                    foreach($listStu as $stu)
-                                    {
-                                        ?>
-                                        <tr>
-                                            <td class="btn-check"><input type="checkbox" class="checkbox" name="checkboxes[]" value="<?php echo $stu -> id  ?>"></td>
-                                            <td class="name"> <?php echo $stu -> fullname  ?> </td>
-                                            <td class="student-code"> <?php echo $stu -> student_code ?> </td>
-                                            <td class="class"> <?php echo $stu -> class ?> </td>
-                                            <td class="score1"> <?php if($stu -> result_1){echo $stu -> result_1; }else{ echo '0';} ?> </td>
-                                            <td class="score2"> <?php if($stu -> result_2){echo $stu -> result_2; }else{ echo '0';} ?>  </td>
-                                            <td class="score3"> <?php if($stu -> result_3){echo $stu -> result_3; }else{ echo '0';} ?> </td>
-                                            <td class="totalScore"> <?php if($stu -> score){echo $stu -> score; }else{ echo '0';} ?> </td>
-                                            <td class="btn-setting-delete"> 
-                                                <button type="button" class="update-btn"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button>
-                                                <button type="button" class="update-btn"><a href="?act=ResetCurrentTurn&id=<?php echo $stu -> id ?>">RESET</a></button>     
-                                            </td>
-                                            <td class="btn-setting-delete">
-                                                <button type="button" class="delete-btn" onclick="confirmDeleted('?act=DeleteStudent&id=<?php echo $stu -> id?>')">XOÁ</button>     
-                                            </td>
-                                        </tr>
-                                        <?php
+
+                                        foreach($listStu as $stu)
+                                        {
+                                            ?>
+                                            <tr>
+                                                <td class="btn-check"><input type="checkbox" class="checkbox" name="checkboxes[]" value="<?php echo $stu -> id  ?>"></td>
+                                                <td class="name"> <?php echo $stu -> fullname  ?> </td>
+                                                <td class="student-code"> <?php echo $stu -> student_code ?> </td>
+                                                <td class="class"> <?php echo $stu -> class ?> </td>
+                                                <td class="score1"> <?php if($stu -> result_1){echo $stu -> result_1; }else{ echo '0';} ?> </td>
+                                                <td class="score2"> <?php if($stu -> result_2){echo $stu -> result_2; }else{ echo '0';} ?>  </td>
+                                                <td class="score3"> <?php if($stu -> result_3){echo $stu -> result_3; }else{ echo '0';} ?> </td>
+                                                <td class="totalScore"> <?php if($stu -> score){echo $stu -> score; }else{ echo '0';} ?> </td>
+                                                <td class="btn-setting-delete"> 
+                                                    <button type="button" class="update-btn"><a href="?act=UpdateStudent&id=<?php echo $stu -> id ?>">SỬA</a></button>
+                                                    <button type="button" class="update-btn"><a href="?act=ResetCurrentTurn&id=<?php echo $stu -> id ?>">RESET</a></button>     
+                                                </td>
+                                                <td class="btn-setting-delete">
+                                                    <button type="button" class="delete-btn" onclick="confirmDeleted('?act=DeleteStudent&id=<?php echo $stu -> id?>')">XOÁ</button>     
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
                                     }
-                                }
                                 ?>
                             </table>
                         </div>
 
-                    <?php
-                        if($emptyData == false)
-                        {
-                            ?>
+
                             <div class="btn-func">
                                 <button type="button" onclick="selectAll()">Chọn tất cả</button>
                                 <button type="button" onclick="deselectAll()">Bỏ chọn tất cả</button>
                                 <button onclick="confirmDeleted('?act=DeleteStudentSelected')" type="submit" name="btn-delSelected">Xoá các mục đã chọn</button>
                                 <button type="button"><a href="?act=AddStudent">Nhập thêm</a></button>
                             </div>
-                            <?php
-                        }
-                    ?>
 
                 </form>
             </div>

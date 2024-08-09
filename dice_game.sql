@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Aug 08, 2024 at 11:38 AM
+-- Host: 127.0.0.1
+-- Generation Time: Aug 09, 2024 at 01:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,8 @@ INSERT INTO `classes` (`id`, `className`, `question_group`, `created_at`, `start
 (1, 'WD19320', 1, '2024-08-06', '2024-08-08', '2024-08-10'),
 (2, 'WD19321', 2, '2024-08-01', '2024-08-08', '2024-08-10'),
 (5, 'WD19323', 1, '2024-08-08', '2024-08-08', '2024-08-09'),
-(6, 'WD19324', 1, '2024-08-08', '2024-08-08', '2024-08-09');
+(6, 'WD19324', 1, '2024-08-08', '2024-08-08', '2024-08-09'),
+(7, 'SA19304', 1, '2024-08-09', '2024-08-09', '2024-08-15');
 
 --
 -- Triggers `classes`
@@ -119,7 +120,7 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`id`, `limit`, `Totalscore`, `rate1`, `rate2`) VALUES
-(1, 4, 10, 1, 1);
+(1, 10000000, 10, 20, 10);
 
 -- --------------------------------------------------------
 
@@ -225,22 +226,6 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`, `class`, `result_1`, `result_2`, `result_3`, `score`, `created_at`, `current_turn`) VALUES
 (10, 'Hoàng Ngọc Lĩnh', 'hoangngoclinh', 'PH53070', '$2y$10$SsubfST.GK5UPmCw2IndG.vg1bxceN9UWQ7tBQYbNtgpdwrKwunAi', 'WD19321', 12, 1, 9, 8, NULL, 4),
-(25, 'Vũ Văn Mạnh', 'vuvanmanh', 'PH53085', 'mno567', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(26, 'Nguyễn Văn Tuấn', 'nguyenvantuan', 'PH53086', 'pqr890', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(27, 'Lê Văn Đức', 'levanduc', 'PH53087', 'stu123', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(28, 'Phạm Thị Hồng', 'phamthihong', 'PH53088', 'vwx456', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(29, 'Trần Văn Long', 'tranvanlong', 'PH53089', 'yz7890', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(30, 'Nguyễn Thị Tuyết', 'nguyenthituyet', 'PH53090', 'abc678', 'WD19320', NULL, NULL, NULL, 8, '2024-08-01 15:39:27', 0),
-(31, 'Lê Văn Minh', 'levanminh', 'PH53091', 'def901', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(32, 'Phạm Quang Vinh', 'phamquangvinh', 'PH53092', 'ghi234', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(33, 'Nguyễn Văn Hoàng', 'nguyenvanhoang', 'PH53093', 'jkl567', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(34, 'Lê Văn Tùng', 'levantung', 'PH53094', 'mno890', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(35, 'Phạm Thị Lan', 'phamthilan', 'PH53095', 'pqr123', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(36, 'Nguyễn Thị Thanh', 'nguyenthithanh', 'PH53096', 'stu456', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(37, 'Lê Hoàng Anh', 'lehoanganh', 'PH53097', 'vwx789', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(38, 'Phạm Minh Khang', 'phamminhkhang', 'PH53098', 'yz0123', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(40, 'Vũ Văn Huy', 'vuvanhuy', 'PH53100', 'def789', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
-(42, 'Trần Văn An', 'tranvanan', 'PH53102', 'jkl345', 'WD19320', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (43, 'Nguyễn Văn Bình', 'nguyenvanbinh', 'PH53103', '$2y$10$BBDpo4QVfUwIrsmeoTUFW.ESKyxLo2yzTkMv6ret1VP4.gvWdrv1i', 'WD19323', 0, 0, 0, 2, NULL, 0),
 (44, 'Trần Thị Hương', 'tranthihuong', 'PH53104', 'def789', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (45, 'Lê Văn Quang', 'levanquang', 'PH53105', 'ghi012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
@@ -282,11 +267,9 @@ INSERT INTO `student` (`id`, `fullname`, `username`, `student_code`, `password`,
 (81, 'Phạm Minh Phú', 'phamminhphu', 'PH53141', 'ghi012', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (82, 'Trần Thị Yến', 'tranthiyen', 'PH53142', 'jkl345', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 15:39:27', 0),
 (83, 'Lê Văn Trừ', 'levanhieu897', 'PH53143', '123123', 'WD19321', NULL, NULL, NULL, NULL, '2024-08-01 17:24:03', 0),
-(84, 'Lê Văn Hiệu', 'levanhieu', 'PH53067', '$2y$10$xnfWH21sz6JFzpgUpDFsQ.zOFy.BwvDiLDPaq38qXx3Vu4Q88zmDS', 'WD19320', 17, 16, 5, 0, NULL, 4),
-(85, 'admin', 'admin2', 'PH00000', '$2y$10$.mvf7Q3Ijza2o53YRHSs2.tOAmF121yCgO3cdnr5a3N3u4434wiQe', 'WD19320', 2, 36, 19, 0, NULL, 0),
-(86, 'Vũ Thị Hưởng', 'test1', 'PH0002', '$2y$10$WrWfRjDrgZsFhHUcOXETz.Ft3iiwiI9EpUaAkrS/wATwhaaN7DIo6', 'WD19320', NULL, NULL, NULL, NULL, NULL, 0),
-(87, 'Đào Ngọc Hào', 'daongochao', 'PH00009', '$2y$10$tgeNGGmo/SVK24VL3f6c5.bcYxbBNJ2X4e8PsZIBi26V.YoE8Ps0u', 'WD19320', 0, 0, 0, 0, NULL, 0),
-(88, 'Lê Văn Duẩn', 'levanduan', 'PH00006', '$2y$10$j52URLogLyvKgMcw/Fq98u8TsfE6NuYqYkAFegHUfkTM34lHX1hy2', 'WD19320', NULL, NULL, NULL, NULL, NULL, 0);
+(89, 'Nguyễn Tiến Trung', 'PH41273', 'PH41273', '$2y$10$W6A5KVnHd5gZa8RWnKpHyePJxRJsWSChzWCKUzRGI87PzYtVI3u6q', 'SA19304', NULL, NULL, NULL, NULL, NULL, 0),
+(90, 'Nguyễn Quốc An', 'PH48883', 'PH48883', '$2y$10$kzFfIzuSWJ.l7myIqH65RubEdHoMPR5Wj93TbzNlhtL6EgKgreudG', 'SA19304', NULL, NULL, NULL, NULL, NULL, 0),
+(91, 'Nguyễn Trung Hiếu', 'PH48938', 'PH48938', '$2y$10$gyKsjaARWF0cLjMK5BJRbuQYXGx2TZcFPc29fhyYc/Oh9w65BHQyG', 'SA19304', NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -305,22 +288,6 @@ CREATE TABLE `student_classes` (
 
 INSERT INTO `student_classes` (`student_class`, `classes_id`) VALUES
 (10, 1),
-(25, 1),
-(26, 1),
-(27, 1),
-(28, 1),
-(29, 1),
-(30, 1),
-(31, 1),
-(32, 1),
-(33, 1),
-(34, 1),
-(35, 1),
-(36, 1),
-(37, 1),
-(38, 1),
-(40, 1),
-(42, 1),
 (43, 2),
 (44, 2),
 (45, 2),
@@ -432,7 +399,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `config`
@@ -456,7 +423,7 @@ ALTER TABLE `question_groups`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- Constraints for dumped tables
