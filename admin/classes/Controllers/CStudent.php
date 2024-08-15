@@ -81,7 +81,7 @@
                 $cStu = new Students();
                 $cClas = new Classes();
                 $listStu = $cStu -> getDataFromUser($_SESSION['username']);
-                $nameClass = 'WD19320';
+                $nameClass = $listStu -> class;
                 $listDay = $cClas -> getDayExam($nameClass);
                 $currentDate = new DateTime(); // Lấy ngày hiện tại
                 $startDate = new DateTime($listDay->startday); // Ngày bắt đầu

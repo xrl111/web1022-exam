@@ -15,7 +15,7 @@
 
 <div id="header">
     <span  onclick="openNav()">&#9776;</span>
-    <h2><?php echo $_SESSION['fullname'] ?></h2>
+    <h2><?php if (isset($_SESSION['fullname'])){echo $_SESSION['fullname'];} else echo "UNKNOWN";  ?></h2>
 
 </div>
 
@@ -39,15 +39,14 @@
                                   <tr>
                                     <td class="class-name"> <?php echo $listStu -> class  ?> </td>
                                     <td class="totalScore"> <?php if($listStu -> score){echo $listStu -> score; }else{ echo '0';} ?> </td>
-                                    <?php
-                                    
-                                        if($currentDate >= $startDate && $currentDate <= $endDate)
-                                        {
-                                            ?>
+                                    <?php    
+                                    if($currentDate >= $startDate && $currentDate <= $endDate)
+                                    {
+                                        ?>
                                                 <td class="btn-setting-delete">
                                                     <button type="button"><a href="?act=DiceGame">Vào thi</a></button>
                                                 </td>
-                                            <?php
+                                                <?php
                                         }   
                                     ?>
                                    
